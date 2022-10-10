@@ -21,6 +21,7 @@ class Golondrina:
   def __repr__(self) -> str:
     return f"<🐦 at {hex(id(self))}>"
 
+
 class Dragon:
   def __init__(self, cantidad_dientes, energia):
     self.energia = energia
@@ -49,10 +50,21 @@ class Dragon:
 
 
 class Entrenador:
-    def entrenar(self,animal):
+  def __init__(self,animal):
+    self.animal = animal
+
+  def entrenar(self,animal):
+    for i in range(20):
+      animal.volar_en_circulos()
+    animal.comer_peces(3)
+
+  def entrenamiento_intensivo(self,animal):
+    if not animal.esta_debil():
+      for i in range(animal.energia):
         animal.volar_en_circulos()
 
 
 maria = Golondrina(42)
 chimuelo = Dragon(200, 1000)
-hipo = Entrenador(animal)
+hipo = Entrenador(chimuelo)
+
