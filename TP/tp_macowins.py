@@ -2,22 +2,16 @@ from operator import itemgetter
 from datetime import date
 hoy = date.strftime(date.today(), "%Y-%m-%d")
 
-
-def suma(a,b):
-    return a + b
-
+def reiniciar_listas():
+    global productos
+    global ventas
+    global codigos
+    productos.clear()
+    ventas.clear()
+    codigos.clear()
 
 ventas = []
-ventas_del_anio_actual = []
-productos = [
-#    {
-#     "codigo": 100,
-#     "nombre": "remera talle m",
-#     "categoria": "remera",
-#     "precio": 4500,
-#     "stock":0
-# }
-]
+productos = []
 codigos = []
 
 
@@ -66,7 +60,7 @@ def registrar_producto(nombre_producto):
     global productos
     global codigos
     if nombre_producto["codigo"] in codigos:
-        raise  ValueError("Producto ya registrado")
+        raise ValueError("Producto ya registrado")
     else:
         nombre_producto["stock"] = 0
         productos.append(nombre_producto)
@@ -136,7 +130,7 @@ def realizar_compra(codigo_de_producto, cantidad_de_items_a_comprar):
     global ventas
     global productos
     for producto in productos:
-        if producto["codigo"] == codigo_de_producto:
+        if producto["codigo"] == codigo_de_producto and cantidad_de_items_a_comprar > 0:
             hay_stock_para_vender = producto["stock"] - cantidad_de_items_a_comprar
             if hay_stock_para_vender < 0:
                 raise ValueError('No hay stock suficiente para la venta')   
@@ -149,9 +143,7 @@ def realizar_compra(codigo_de_producto, cantidad_de_items_a_comprar):
                 "precio_total": producto["precio"] * cantidad_de_items_a_comprar
                 }
                 ventas.append(venta)
-                #return "Compra realizada, agregada a ventas"
-        # else:
-        #     return "Código incorrecto o cantidad de items no puede ser menor a 1"
+    return "Código incorrecto o cantidad de items no puede ser menor a 1"
 
 
 
@@ -188,7 +180,7 @@ def valor_ventas_del_dia():
 # 9. ventas_del_anio: retorna un listado con todas las ventas para el año actual.
 
 def ventas_del_anio():
-    global ventas_del_anio_actual
+    ventas_del_anio_actual = []
     anio_actual = hoy[:4]
     for producto in ventas:
         if producto["fecha"][:4] == anio_actual:
@@ -232,3 +224,7 @@ def actualizar_precios_por_categoria(categoria,porcentaje):
 # estara bien el raise acá, preguntar en clase            
     if count == len(productos):
         raise ValueError("Categoria no encontrada o mal escrita")
+
+
+
+
