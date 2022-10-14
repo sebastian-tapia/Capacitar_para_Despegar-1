@@ -56,15 +56,16 @@ pantalon_talle_m = {
 # 1. Registrar_producto: recibe un diccionario con codigo, nombre, categoria, precio y agrega un producto nuevo a la lista de productos. El stock del producto agregado debe estar inicialmente en cero.
 
 
-def registrar_producto(nombre_producto):
+def registrar_producto(producto):
     global productos
     global codigos
-    if nombre_producto["codigo"] in codigos:
+    if producto["codigo"] in codigos:
         raise ValueError("Producto ya registrado")
     else:
-        nombre_producto["stock"] = 0
-        productos.append(nombre_producto)
-        codigos.append(nombre_producto["codigo"])
+        producto["stock"] = 0
+        productos.append(producto)
+        codigos.append(producto["codigo"])
+
 
 
 
@@ -87,11 +88,11 @@ def recargar_stock(codigo,stock):
 # 3. hay_stock: recibe un código de producto y dice si hay stock (es decir, si el stock correspondiente es mayor a cero). Si el código indicado no existe en la lista de productos, debe devolver False.
 
 def hay_stock(codigo):
+    stock = True
     for producto in productos:
         if producto["codigo"] == codigo and producto["stock"] > 0:
-            return True
-    
-    return False
+            return stock
+    return not stock
 
 
 
@@ -118,6 +119,7 @@ def contar_categorias(productos):
         if producto["categoria"] not in categorias:
             categorias.append(producto["categoria"])
     return len(categorias)
+
 
 
 
@@ -153,6 +155,7 @@ def discontinuar_productos(dic_productos):
     for producto in dic_aux:
         if producto["stock"] == 0:
             dic_productos.remove(producto)
+
 
 
 # 8. valor_ventas_del_dia: retorna el valor total de las ventas del día de hoy
@@ -210,16 +213,6 @@ def productos_mas_vendidos(cantidad):
 def actualizar_precios_por_categoria(categoria,porcentaje):
     global productos
     categoria_reconocida = categoria.lower().strip()
-    count = 0
     for producto in productos:
         if producto["categoria"] == categoria_reconocida:
             producto["precio"] += producto["precio"] * porcentaje / 100
-        else:
-            count += 1
-# estara bien el raise acá, preguntar en clase            
-    if count == len(productos):
-        raise ValueError("Categoria no encontrada o mal escrita")
-
-
-###
-
