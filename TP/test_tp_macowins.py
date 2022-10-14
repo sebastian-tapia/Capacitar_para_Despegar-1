@@ -57,17 +57,17 @@ def test_no_hay_stock_de_un_codigo_no_cargado():
 
 def test_hay_stock_de_un_codigo_existente_con_stock():
     reiniciar_listas()
-    registrar_dos_productos_y_recargar_stock_a_dos()
+    registrar_tres_productos_y_recargar_stock_a_dos()
     assert hay_stock(100)
 
 def test_de_codigo_existente_sin_stock():
     reiniciar_listas()
-    registrar_dos_productos_y_recargar_stock_a_dos()
+    registrar_tres_productos_y_recargar_stock_a_dos()
     assert not hay_stock(99)
 
 def test_de_codigo_inexistente_cuando_hay_productos_cargados():
     reiniciar_listas()
-    registrar_dos_productos_y_recargar_stock_a_dos()
+    registrar_tres_productos_y_recargar_stock_a_dos()
     assert not hay_stock(98767)
 
 #####################  Tests de ejercicio 4  #####################
@@ -275,7 +275,7 @@ def registrar_tres_productos_recargar_a_dos_y_comprar_a_dos():
     realizar_compra(100, 100)
     realizar_compra(99,50)
 
-def registrar_dos_productos_y_recargar_stock_a_dos():
+def registrar_tres_productos_y_recargar_stock_a_dos():
     registrar_producto(remera_talle_m)
     registrar_producto(remera_talle_s)
     registrar_producto(pulserita)

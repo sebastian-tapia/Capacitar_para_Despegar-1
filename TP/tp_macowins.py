@@ -96,7 +96,6 @@ def hay_stock(codigo):
 
 
 
-
 #  4. calcular_precio_final: toma un producto (un diccionario) y un booleano es_extranjero y calcula su valor final, según la siguiente regla:
 #   a. si quien calcula el precio es extranjero y el valor es mayor de $70, es el mismo valor sin cambios. 
 # b. en caso contrario, es el valor original más un 21%
