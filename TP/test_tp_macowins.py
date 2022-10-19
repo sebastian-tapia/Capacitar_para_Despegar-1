@@ -2,282 +2,248 @@ from tp_macowins import *
 import pytest
 
 
-#####################  Tests de ejercicio 1  #####################
-
-def test_registrar_un_producto():
-    reiniciar_listas()
-    registrar_producto({"codigo": 100, "nombre": "remera talle m", "categoria": "remera", "precio": 4500})
-    assert len(codigos) == 1
-    assert len(productos) == 1
-    assert productos[0]["stock"] == 0
-
-def test_registrar_dos_productos():
-    reiniciar_listas()
-    registrar_producto(remera_talle_s)
-    registrar_producto(remera_talle_m)
-    assert len(codigos) == 2
-    assert len(productos) == 2
-
-def test_no_registrar_productos_existentes():
-    reiniciar_listas()
+####################### EJERCICIO 1 #######################
+def test_se_agregra_productos_a_lista_():
+    localfisico = Fisico(3250)
+    localfisico.registrar_producto(remera_m)
+    assert len(localfisico.productos)==1
+def test_se_agregra_productos_repetido_se_espera_el_RAISE_exception():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
     with pytest.raises(ValueError) as auxiliar:
-        registrar_producto(remera_talle_s)
-        registrar_producto(remera_talle_m)
-        registrar_producto(remera_talle_s)
+
+        localfisico.registrar_producto(pulsera)
+        localfisico.registrar_producto(pulsera)
+        
     assert str(auxiliar.value) == "Producto ya registrado"
-    assert len(productos) == 2
+
+def test_al_REGISTRAR_producto_se_espera_que_ingrese_con_stock_en_0():
+
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(pulsera)
+    assert localfisico.buscar_prenda_por_codigo_devoler_stock(1098)==0
     
+def test_registro_2_productos_se_espera_que_productos_tenga_2():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(pulsera)
+    localfisico.registrar_producto(remera_m)
+    assert len(localfisico.productos) ==2
 
-#####################  Tests de ejercicio 2  #####################
 
-def test_recarga_de_stock_codigo_inexiste():
-    reiniciar_listas()
+####################### EJERCICIO 2 #######################
+
+def test_recarga_stock_20_a_un_producto_devuelve_20():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.recargar_stock(100,20)
+    assert localfisico.buscar_prenda_por_codigo_devoler_stock(100)==20
+
+def test_cargar_stock_con_codigo_inexistente_en_productos_devuelve_exepcion():
+    localfisico.reiniciar_listas()
     with pytest.raises(ValueError) as auxiliar:
-        recargar_stock(100, 200)
+        localfisico.recargar_stock(1000,10)
     assert str(auxiliar.value) == "Codigo de producto ingresado no existe"
+    assert len(localfisico.productos)==0
+
+
+
+####################### EJERCICIO 3 #######################
+
+def test_no_hay_stock_en_un_producto_recien_registrado_deberia_dar_false_():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    assert not localfisico.hay_stock(100)
+
+def test_cargar_stock_a_un_producto_registrado_y_preguntar_si_tiene_stock_devuelve_True_():
+    localfisico = Fisico(3250)
+    localfisico.registrar_producto(remera_m)
+    localfisico.recargar_stock(100,100)
+    assert localfisico.hay_stock(100)
+
+
+
+# def test_foo():
+#     remera_m=Prenda(remera_talle_m)
+#     assert remera_m.diccionario==remera_talle_m
+#     print(remera_m.diccionario)
+
+####################### EJERCICIO 4 #######################
+
+def test_precio_final_remera_m_y_sea_turista_es_4500():
+    assert remera_m.calcular_precio_final(True)==4500
+
+def test_precio_final_pulserita_y_no_sea_turista_es_60_5():
+    assert pulsera.calcular_precio_final(False)==60.5
+
+
+####################### EJERCICIO 5 #######################
+
+def test_agrego_2_productos_distintas_categorias_deberia_devolver_2():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(pulsera)
+    assert localfisico.contar_categorias()==2
+
+def test_registrar_2_productos_misma_categoria_devuelve_1():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    assert localfisico.contar_categorias()==1
+
+
+####################### EJERCICIO 6 #######################
+
+def test_realizar_una_compra_de_un_producto_decrementa_su_stock_de_100_a_80():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.recargar_stock(100,100)
+    localfisico.realizar_compra(100,20)
+    assert localfisico.buscar_prenda_por_codigo_devoler_stock(100)==80
+
+
+def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_ventas_es_1():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.recargar_stock(100,100)
+    localfisico.realizar_compra(100,20)
+    assert len(localfisico.ventas)==1
+
+def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_ventas_es_2():
+    localfisico = Fisico(3250)
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
     
-
-def test_recarga_de_stocks_a_dos_productos():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    recargar_stock(100, 200)
-    recargar_stock(99, 50)
-    assert productos[0]["stock"] == 200
-    assert productos[1]["stock"] == 50
-    recargar_stock(99, 50)
-    assert productos[1]["stock"] == 100
+    localfisico.recargar_stock(100,100)
+    localfisico.realizar_compra(100,20)
+    localfisico.realizar_compra(100,10)
+    assert len(localfisico.ventas)==2
 
 
-#####################  Tests de ejercicio 3  #####################
+####################### EJERCICIO 7 #######################
 
-def test_no_hay_stock_de_un_codigo_no_cargado():
-    reiniciar_listas()
-    assert not hay_stock(99)
+def test_remueve_todos_los_productos_con_stock_en_0():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.discontinuar_productos()
+    assert len(localfisico.productos)==0
 
-def test_hay_stock_de_un_codigo_existente_con_stock():
-    reiniciar_listas()
-    registrar_tres_productos_y_recargar_stock_a_dos()
-    assert hay_stock(100)
+def test_elimina_el_producto_sin_stock_de_tres_productos_la_lista_productos_debe_ser_2():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,50)
+    localfisico.discontinuar_productos()
+    assert len(localfisico.productos) == 2
 
-def test_de_codigo_existente_sin_stock():
-    reiniciar_listas()
-    registrar_tres_productos_y_recargar_stock_a_dos()
-    assert not hay_stock(99)
-
-def test_de_codigo_inexistente_cuando_hay_productos_cargados():
-    reiniciar_listas()
-    registrar_tres_productos_y_recargar_stock_a_dos()
-    assert not hay_stock(98767)
-
-#####################  Tests de ejercicio 4  #####################
-
-def test_calcular_precio_final_si_es_extranejero_y_precio_mayor_a_70_con_precio_original_4500():
-    assert calcular_precio_final(remera_talle_m,True) == 4500
-    
-def test_calcular_precio_si_no_es_extranjero_y_precio_es_menor_a_70_con_precio_original_50():
-    assert calcular_precio_final(pulserita,False) == 60.5
-
-
-#####################  Tests de ejercicio 5  #####################
-
-def test_registrar_dos_productos_de_la_misma_categoria_debe_devolver_una_categoria():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    assert contar_categorias(productos) == 1
-
-def test_registrar_tres_productos_siendo_dos_de_la_misma_debe_devolver_dos_categorias():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    assert contar_categorias(productos) == 2
+def test_hay_tres_productos_con_stock_no_deberia_eliminar_ninguno_largo_de_Lista_debe_ser_3():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,50)
+    localfisico.recargar_stock(1098,100)
+    localfisico.discontinuar_productos()
+    assert len(localfisico.productos) == 3
 
 
-#####################  Tests de ejercicio 6  #####################
-
-def test_realizar_dos_compras_de_codigo_existente_debe_agregar_dos_ventas():
-    reiniciar_listas()
-    registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-    assert len(ventas) == 2
-
-
-def test_realizar_dos_compras_de_codigo_existente_con_stock_debe_decrementar_stock_del_ultimo():
-    reiniciar_listas()
-    registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-    #assert hay_stock(100)
-    assert not hay_stock(99)
-
-
-def test_realizar_una_compra_de_codigo_existente_con_stock_insuficiente_debe_entrar_en_excepcion():
-    reiniciar_listas()
-    with pytest.raises(ValueError) as auxiliar:
-        registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-        realizar_compra(100, 150)
-    assert str(auxiliar.value) == "No hay stock suficiente para la venta"
-
-
-def test_realizar_una_compra_de_codigo_existente_con_stock_insuficiente_no_debe_aumentar_ventas():
-    reiniciar_listas()
-    with pytest.raises(ValueError) as auxiliar:
-        registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-        realizar_compra(100, 150)
-    assert len(ventas) == 2
-
-
-def test_realizar_una_compra_de_codigo_inexistente():
-    reiniciar_listas()
-    registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()   
-    assert realizar_compra(99999, 10) == "Código incorrecto o cantidad de items no puede ser menor a 1"
-
-
-def test_realizar_una_compra_de_0_items_a_codigo_existente():
-    reiniciar_listas()
-    registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()    
-    assert realizar_compra(100, 0) == "Código incorrecto o cantidad de items no puede ser menor a 1"
-
-
-#####################  Tests de ejercicio 7  #####################
-
-def test_eliminar_el_producto_sin_stock_de_tres_productos():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100,200)
-    recargar_stock(99,50)
-    discontinuar_productos(productos)
-    assert len(productos) == 2
-
-def test_eliminar_tres_productos_sin_stock_de_una_lista_de_tres_productos_sin_stock():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    discontinuar_productos(productos)
-    assert len(productos) == 0
-
-def test_lista_de_cinco_productos_con_stock_no_se_deberia_eliminar_ninguno():
-    reiniciar_listas()
-    registrar_cinco_productos()
-    recargar_stock_a_cinco_productos()
-    discontinuar_productos(productos)
-    assert len(productos) == 5
-
-
-#####################  Tests de ejercicio 8  #####################
+####################### EJERCICIO 8 #######################
+# def valor_ventas_del_dia():
+#     suma_ventas_del_dia = 0
+#     subtotal = 0
+#     for venta_de_hoy in ventas:
+#         if venta_de_hoy["fecha"] == hoy:
+#             subtotal = venta_de_hoy["precio_total"] #* venta_de_hoy["cantidad"]
+#             suma_ventas_del_dia += subtotal
+#     return suma_ventas_del_dia
 
 def test_realizar_una_compra_del_dia_de_100_unidades_de_un_producto_que_cuesta_4500_debe_devolver_450000():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100,200)
-    recargar_stock(99,50)
-    realizar_compra(100,100)
-    assert valor_ventas_del_dia() == 450000
-
-
-#a la lista de ventas se le agrega dos productos comprados con otras fechas
-def test_ventas_del_dia_de_150_unidades_entre_dos_productos_debe_devolver_total_precio_de_675000():
-    reiniciar_listas()
-    registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-    ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    assert valor_ventas_del_dia() == 675000
     
-
-
-#####################  Tests de ejercicio 9  #####################
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,50)
+    localfisico.realizar_compra(100,100)
+    assert localfisico.valor_ventas_del_dia() == 450000
 
 #a la lista de ventas se le agrega dos productos comprados con otras fechas
-def test_cuatro_ventas_en_total_dos_de_este_año_debe_devolver_dos_ventas_del_anio():
-    reiniciar_listas()
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100,200)
-    recargar_stock(99,50)
-    realizar_compra(100,100)
-    realizar_compra(99,50)
-    ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    assert len(ventas_del_anio()) == 2 
+def test_ventas_del_dia_de_150_unidades_entre_dos_productos_debe_devolver_675000():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,50)
+    localfisico.realizar_compra(100,100)
+    localfisico.realizar_compra(99,50)
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    assert localfisico.valor_ventas_del_dia() == 675000
 
 
-#####################  Tests de ejercicio 10  #####################
+####################### EJERCICIO 9 #######################
 
-def test_debe_devolver_los_nombres_de_los_tres_productos_mas_vendidos_en_orden_descendente():
-    reiniciar_listas()
-    registrar_cinco_productos()
+def test_cuatro_ventas_dos_de_este_año_debe_devovler_dos_ventas_del_anio():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,50)
+    localfisico.realizar_compra(100,100)
+    localfisico.realizar_compra(99,50)
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    assert len(localfisico.ventas_del_anio()) == 2
+
+
+####################### EJERCICIO 10 #######################
+
+def test_tres_productos_mas_vendidos_debe_devolver_los_nombres_de_los_tres_productos_mas_vendidos_en_orden_ascendente():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(pantalon_m)
+    localfisico.registrar_producto(campera_l)
+    localfisico.registrar_producto(pulsera)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(remera_m)
     recargar_stock_a_cinco_productos()
     realizar_compra_a_cinco_productos()
-    assert productos_mas_vendidos(3)  == ["pantalon talle m", "campera talle l", "pulserita de tela verde"]
 
-def test_debe_devolver_los_nombres_de_los_cuatro_productos_mas_vendidos_en_orden_descendente():
-    reiniciar_listas()
-    registrar_cinco_productos()
-    recargar_stock_a_cinco_productos()
-    realizar_compra_a_cinco_productos()
-    assert productos_mas_vendidos(4)  == ["pantalon talle m", "campera talle l", "pulserita de tela verde", "remera talle s"]
+    
+    assert localfisico.productos_mas_vendidos(3)  == ["pantalon talle m", "campera talle l", "pulserita de tela verde"]
 
-#####################  Tests de ejercicio 11  #####################
+
+####################### EJERCICIO 11 #######################
 
 def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_mal_escrita_en_un_50_porciento_debe_actualizar_el_precio_a_6750():
-    reiniciar_listas()
+    localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    actualizar_precios_por_categoria(" reMera ",50)
-    assert productos[0]["precio"] == 6750
-    assert productos[1]["precio"] == 6750
+    localfisico.actualizar_precios_por_categoria(" reMera ",50)
+    assert localfisico.productos[0]["precio"] == 6750
+    assert localfisico.productos[1]["precio"] == 6750
 
 
 def test_actualizar_precio_a_categoria_accesorios_mal_escrita_en_50_porciento_debe_actualizar_el_precio_a_75():
-    reiniciar_listas()
+    localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    actualizar_precios_por_categoria(" aCceSoriOs",50)
-    assert productos[2]["precio"] == 75
+    localfisico.actualizar_precios_por_categoria(" aCceSoriOs",50)
+    assert localfisico.productos[2]["precio"] == 75
 
 
+############# Tests de Prenda #############
 
-
-
-
-
-#funciones auxiliares
-def registrar_cinco_productos():
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    registrar_producto(campera_talle_l)
-    registrar_producto(pantalon_talle_m)
-
-def recargar_stock_a_cinco_productos():
-    recargar_stock(100,200)
-    recargar_stock(99,200)
-    recargar_stock(1098,200)
-    recargar_stock(555,200)
-    recargar_stock(444,200)
-
-def realizar_compra_a_cinco_productos():
-    realizar_compra(100,25)
-    realizar_compra(99,50)
-    realizar_compra(1098,100)
-    realizar_compra(555,150)
-    realizar_compra(444,200)
-
-def registrar_tres_productos_recargar_a_dos_y_comprar_a_dos():
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100,200)
-    recargar_stock(99,50)
-    realizar_compra(100, 100)
-    realizar_compra(99,50)
-
-def registrar_tres_productos_y_recargar_stock_a_dos():
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100, 200)
-    recargar_stock(1098, 200)
+def test_de_prenda_en_promocion_descuenta_500_de_su_valor_quedando_en_4000():
+    localfisico.reiniciar_listas()
+    localvirtual.reiniciar_listas()
+    assert remera_s.promocion(500) == 4000
