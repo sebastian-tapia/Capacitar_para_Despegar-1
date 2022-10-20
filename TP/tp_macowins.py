@@ -183,9 +183,8 @@ class Local:
         busqueda_reconocida = nombre_categoria.lower().strip()
         for producto in self.productos:
             if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
-                print(producto["nombre"])
                 producto["precio"] += producto["precio"] * porcentaje / 100
-                print(producto["precio"])
+
 
 
     def buscar_prenda_por_codigo_devoler_stock(self,codigo):
@@ -221,8 +220,10 @@ class Virtual(Local):
 class Prenda:
     def __init__(self,diccionario):
         self.diccionario=diccionario
+        self.codigo_original = self.diccionario["codigo"]
+        self.nombre_original = self.diccionario["nombre"]
+        self.categoria_original = self.diccionario["categoria"]
         self.precio_original = self.diccionario["precio"]
-
 
     def calcular_precio_final(self, es_extranjero):
         if self.diccionario["precio"] > 70 and es_extranjero:
@@ -242,6 +243,7 @@ class Prenda:
 
     def liquidacion(self):
         self.diccionario["precio"] /= 2
+        return self.diccionario["precio"]
 
     def categoria(self,busquedaCategoria):
         categoria_reconocida = busquedaCategoria.lower().strip()
@@ -259,21 +261,25 @@ class Prenda:
 
     def descripcion_producto(self):
         return self.diccionario
-    def nombre_producto(self):
-        return self.diccionario["nombre"]
     def codigo_producto(self):
         return self.diccionario["codigo"]
+    def nombre_producto(self):
+        return self.diccionario["nombre"]
     def categoria_producto(self):
         return self.diccionario["categoria"]
     def precio_producto(self):
         return self.diccionario["precio"]
+    def reiniciar_valores(self):
+        self.diccionario["codigo"] = self.codigo_original
+        self.diccionario["nombre"] = self.nombre_original
+        self.diccionario["categoria"] = self.categoria_original
+        self.diccionario["precio"] = self.precio_original
 
 
 
 
-
-localvirtual = Virtual(13250)
-localfisico = Fisico(3250)
+localvirtual = Virtual(1000)
+localfisico = Fisico(77500)
 remera_m=Prenda(remera_talle_m)
 pulsera=Prenda(pulserita)
 remera_s=Prenda(remera_talle_s)
@@ -293,6 +299,7 @@ def recargar_stock_a_cinco_productos():
     localfisico.recargar_stock(1098,200)
     localfisico.recargar_stock(555,200)
     localfisico.recargar_stock(444,200)
+
 def registrar_cinco_productos():
     localfisico.registrar_producto(remera_m)
     localfisico.registrar_producto(remera_s)
@@ -333,7 +340,7 @@ def compra_virtual():
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
 
-def compra_virtual200():
+def compra_virtual_de_200_ventas():
     localvirtual.registrar_producto(remera_m)
     localvirtual.registrar_producto(pulsera)
     localvirtual.registrar_producto(remera_s)
@@ -342,11 +349,29 @@ def compra_virtual200():
     localvirtual.recargar_stock(100,500)
     localvirtual.recargar_stock(1098,1000)
     localvirtual.recargar_stock(99,2000)
-    localvirtual.realizar_compra(99,4)
-    localvirtual.realizar_compra(1098,5)
-    localvirtual.realizar_compra(100,10)
-    for i in range(200):
-        localvirtual.realizar_compra(1098,1)
+    for i in range(100):
+        localvirtual.realizar_compra(100,1) # 4500 * 100 = 450000 
+    for i in range(50):
+        localvirtual.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
+    for i in range(50):
+        localvirtual.realizar_compra(99,1) # 4500 * 50 = 225000
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localvirtual.ventas_del_dia()
+
+def compra_fisica_de_200_unidades():
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(pulsera)
+    localfisico.registrar_producto(remera_s)
+    localfisico.recargar_stock(100,500)
+    localfisico.recargar_stock(1098,1000)
+    localfisico.recargar_stock(99,2000)
+    for i in range(100):
+        localfisico.realizar_compra(100,1) # 4500 * 100 = 450000 
+    for i in range(50):
+        localfisico.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
+    for i in range(50):
+        localfisico.realizar_compra(99,1) # 4500 * 50 = 225000
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    return localfisico.ventas_del_dia()
