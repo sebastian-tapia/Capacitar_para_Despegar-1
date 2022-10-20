@@ -1,4 +1,4 @@
-from TP3 import *
+from tp_macowins import *
 import pytest
 
 
