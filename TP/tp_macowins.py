@@ -50,26 +50,24 @@ pantalon_talle_m = {
 class Local:
     def __init__(self):
         self.productos=[]
-        self.codigo=[]
+        self.codigos=[]
         self.ventas=[]
 
     def reiniciar_listas(self):
         self.productos.clear()
         self.ventas.clear()
-        self.codigo.clear()
+        self.codigos.clear()
 
-    def registrar_producto(self,objeto):  
-        if  objeto.codigo_producto() in self.codigo:
+    def registrar_producto(self,producto):  
+        if  producto.codigo in self.codigos:
             raise ValueError("Producto ya registrado")
         else:
-            self.productos.append(objeto.descripcion_producto())
-            #self.productos[0]["stock"]=0
-            objeto.descripcion_producto().update({"stock":0})
-            self.codigo.append(objeto.codigo_producto())
+            self.productos.append(producto.producto)
+            self.codigos.append(producto.codigo)
 
 
     def recargar_stock(self,codigo,stock):
-        if codigo not in self.codigo:
+        if codigo not in self.codigos:
             raise ValueError("Codigo de producto ingresado no existe")
         else:
             for producto in self.productos:
@@ -87,8 +85,8 @@ class Local:
     def contar_categorias(self):
         categorias = []
         for producto in self.productos: 
-            if producto["categoria"] not in categorias:
-                categorias.append(producto["categoria"])
+            if producto["categorias"] not in categorias:
+                categorias.append(producto["categorias"])
         return len(categorias) 
 
 
@@ -114,6 +112,13 @@ class Local:
         for producto in dic_aux:
             if producto["stock"] == 0:
                 self.productos.remove(producto)
+                self.codigos.remove(producto["codigo"])
+
+        for producto in self.productos:
+            if producto["stock"] == 0:
+                self.productos.remove(producto)
+                self.codigos.remove(producto["codigo"])
+
 
     def ventas_del_dia(self):
         ventas = 0
@@ -168,7 +173,7 @@ class Local:
     def actualizar_precios_por_categoria(self,categoria,porcentaje):
         categoria_reconocida = categoria.lower().strip()
         for producto in self.productos:
-            if categoria_reconocida in producto["categoria"]:
+            if categoria_reconocida in producto["categorias"]:
                 producto["precio"] += producto["precio"] * porcentaje / 100
 
 #AQUI?
@@ -186,11 +191,12 @@ class Local:
                 producto["precio"] += producto["precio"] * porcentaje / 100
 
 
-
-    def buscar_prenda_por_codigo_devoler_stock(self,codigo):
+    def stock_por_codigo(self,codigo):
+        stock = 0
         for i in self.productos:
-            if i["codigo"]==codigo:
-                return i["stock"]
+            if i["codigo"] == codigo:
+                stock = i["stock"]
+        return stock
 
 
 class Fisico(Local):
@@ -218,160 +224,78 @@ class Virtual(Local):
 
 
 class Prenda:
-    def __init__(self,diccionario):
-        self.diccionario=diccionario
-        self.codigo_original = self.diccionario["codigo"]
-        self.nombre_original = self.diccionario["nombre"]
-        self.categoria_original = self.diccionario["categoria"]
-        self.precio_original = self.diccionario["precio"]
+    def __init__(self,codigo,nombre,categorias,precio):
+        self.codigo = codigo
+        self.nombre = nombre
+        self.categorias = [categorias]
+        self.precio = precio
+        self.stock = 0
+        self.estado = Nueva()
 
-    def calcular_precio_final(self, es_extranjero):
-        if self.diccionario["precio"] > 70 and es_extranjero:
-            return self.diccionario["precio"]
-        else:
-            costo_final = self.diccionario["precio"] * 1.21
-            return costo_final
+        self.producto = {   "codigo": self.codigo,
+                            "nombre": self.nombre,
+                            "categorias": self.categorias,
+                            "precio": self.precio,
+                            "stock": self.stock}
+
+    def cambiar_estado(self,estado_nuevo):
+        self.estado = estado_nuevo
 
 
-    def nueva(self):
-        self.diccionario["precio"] = self.precio_original
-        return self.diccionario["precio"]
+    def precio_estado(self):
+        return self.estado.precio(self.precio)
 
-    def promocion(self,promo):
-        self.diccionario["precio"] -= promo
-        return self.diccionario["precio"]
 
-    def liquidacion(self):
-        self.diccionario["precio"] /= 2
-        return self.diccionario["precio"]
+    # def calcular_precio_final(self, es_extranjero):
+    #     if self.diccionario["precio"] > 70 and es_extranjero:
+    #         return self.diccionario["precio"]
+    #     else:
+    #         costo_final = self.diccionario["precio"] * 1.21
+    #         return costo_final
 
     def categoria(self,busquedaCategoria):
         categoria_reconocida = busquedaCategoria.lower().strip()
-        return categoria_reconocida in self.diccionario["categoria"]
+        return categoria_reconocida in self.categorias
 
     def agregar_categoria(self,nuevaCategoria):
-        self.diccionario["categoria"].append(nuevaCategoria)
+        self.producto["categorias"].append(nuevaCategoria)
 
     def actualizar_precio_por_nombre(self,busqueda,porcentaje):
         busqueda_reconocida = busqueda.lower().strip()
-        if re.search(busqueda_reconocida, self.diccionario["nombre"], re.IGNORECASE):
-            self.diccionario["precio"] += self.diccionario["precio"] * porcentaje / 100
-            return self.diccionario["precio"]
+        if re.search(busqueda_reconocida, self.nombre, re.IGNORECASE):
+            self.precio += self.precio * porcentaje / 100
+            return self.precio
 
 
-    def descripcion_producto(self):
-        return self.diccionario
-    def codigo_producto(self):
-        return self.diccionario["codigo"]
-    def nombre_producto(self):
-        return self.diccionario["nombre"]
-    def categoria_producto(self):
-        return self.diccionario["categoria"]
-    def precio_producto(self):
-        return self.diccionario["precio"]
-    def reiniciar_valores(self):
-        self.diccionario["codigo"] = self.codigo_original
-        self.diccionario["nombre"] = self.nombre_original
-        self.diccionario["categoria"] = self.categoria_original
-        self.diccionario["precio"] = self.precio_original
 
+class Nueva:
+    def precio(self,precio):
+        return precio
 
+class Promocion:
+    def __init__(self, promo):
+        self.promo = promo
+
+    def precio(self,precio):
+        return precio - self.promo
+        
+
+class Liquidacion:
+    def precio(self,precio):
+        return precio / 2
 
 
 localvirtual = Virtual(1000)
 localfisico = Fisico(77500)
-remera_m=Prenda(remera_talle_m)
-pulsera=Prenda(pulserita)
-remera_s=Prenda(remera_talle_s)
-campera_l=Prenda(campera_talle_l)
-pantalon_m=Prenda(pantalon_talle_m)
-
-def realizar_compra_a_cinco_productos():
-    localfisico.realizar_compra(100,25)
-    localfisico.realizar_compra(99,50)
-    localfisico.realizar_compra(1098,100)
-    localfisico.realizar_compra(555,150)
-    localfisico.realizar_compra(444,200)
-
-def recargar_stock_a_cinco_productos():
-    localfisico.recargar_stock(100,200)
-    localfisico.recargar_stock(99,200)
-    localfisico.recargar_stock(1098,200)
-    localfisico.recargar_stock(555,200)
-    localfisico.recargar_stock(444,200)
-
-def registrar_cinco_productos():
-    localfisico.registrar_producto(remera_m)
-    localfisico.registrar_producto(remera_s)
-    localfisico.registrar_producto(pulsera)
-    localfisico.registrar_producto(campera_l)
-    localfisico.registrar_producto(pantalon_m)
+remera_m = Prenda(100,"remera talle m", "remera", 4500)
+pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_s = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
+promo_500 = Promocion(500)
+liquidacion = Liquidacion()
+nueva = Nueva()
 
 
 
-def compra_fisico():
-    localfisico.registrar_producto(remera_m)
-    localfisico.registrar_producto(pulsera)
-    localfisico.registrar_producto(remera_s)
-    remera_s.agregar_categoria("remera de futbol")
-    remera_m.agregar_categoria("remera de basquet")
-    localfisico.recargar_stock(100,500)
-    localfisico.recargar_stock(1098,1000)
-    localfisico.recargar_stock(99,2000)
-    localfisico.realizar_compra(99,4)
-    localfisico.realizar_compra(1098,5)
-    localfisico.realizar_compra(100,10)
-    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
 
-
-def compra_virtual():
-    localvirtual.registrar_producto(remera_m)
-    localvirtual.registrar_producto(pulsera)
-    localvirtual.registrar_producto(remera_s)
-    remera_s.agregar_categoria("remera de futbol")
-    remera_m.agregar_categoria("remera de basquet")
-    localvirtual.recargar_stock(100,500)
-    localvirtual.recargar_stock(1098,1000)
-    localvirtual.recargar_stock(99,2000)
-    localvirtual.realizar_compra(99,4)
-    localvirtual.realizar_compra(1098,5)
-    localvirtual.realizar_compra(100,10)
-    localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-
-def compra_virtual_de_200_ventas():
-    localvirtual.registrar_producto(remera_m)
-    localvirtual.registrar_producto(pulsera)
-    localvirtual.registrar_producto(remera_s)
-    remera_s.agregar_categoria("remera de futbol")
-    remera_m.agregar_categoria("remera de basquet")
-    localvirtual.recargar_stock(100,500)
-    localvirtual.recargar_stock(1098,1000)
-    localvirtual.recargar_stock(99,2000)
-    for i in range(100):
-        localvirtual.realizar_compra(100,1) # 4500 * 100 = 450000 
-    for i in range(50):
-        localvirtual.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
-    for i in range(50):
-        localvirtual.realizar_compra(99,1) # 4500 * 50 = 225000
-    localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    return localvirtual.ventas_del_dia()
-
-def compra_fisica_de_200_unidades():
-    localfisico.registrar_producto(remera_m)
-    localfisico.registrar_producto(pulsera)
-    localfisico.registrar_producto(remera_s)
-    localfisico.recargar_stock(100,500)
-    localfisico.recargar_stock(1098,1000)
-    localfisico.recargar_stock(99,2000)
-    for i in range(100):
-        localfisico.realizar_compra(100,1) # 4500 * 100 = 450000 
-    for i in range(50):
-        localfisico.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
-    for i in range(50):
-        localfisico.realizar_compra(99,1) # 4500 * 50 = 225000
-    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-    return localfisico.ventas_del_dia()
