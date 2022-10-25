@@ -252,32 +252,33 @@ def test_buscar_nombre_incompleto_de_un_prodcuto_y_actualizar_su_precio_en_50_po
 
 
 ############# Tests de Sucursal Fisica #############
-#arrastra el precio de categoria aplicado en los tests de los ejercicios si no se reinician sus valores 
-# valor ventas total 677500
 def test_ganancia_del_dia_se_obtiene_de_la_diferencia_entre_valor_de_ventas_y_gasto_fijo():
     localfisico.reiniciar_listas()
-    compra_fisica_de_200_unidades()
+    compra_fisica_200()
     assert localfisico.ganancia_diaria() == 600000
 
 
-"""
+
 ############# Tests de Sucursal Virtual #############
 
 def test_ganancia_del_dia():
     localvirtual.reiniciar_listas()
-    remera_m.reiniciar_valores()
-    remera_s.reiniciar_valores()
-    pulsera.reiniciar_valores()
     compra_virtual_de_200_ventas()
     assert localvirtual.ganancia_diaria() == 477500
 
-"""
 
 
 
 
 
 
+
+
+
+
+
+
+################ Funciones auxiliares ################
 
 def realizar_compra_a_cinco_productos():
     localfisico.realizar_compra(100,25)
@@ -300,8 +301,6 @@ def registrar_cinco_productos():
     localfisico.registrar_producto(campera_l)
     localfisico.registrar_producto(pantalon_m)
 
-
-
 def compra_fisico():
     localfisico.registrar_producto(remera_m)
     localfisico.registrar_producto(pulsera)
@@ -316,7 +315,6 @@ def compra_fisico():
     localfisico.realizar_compra(100,10)
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
-
 
 def compra_virtual():
     localvirtual.registrar_producto(remera_m)
@@ -334,9 +332,9 @@ def compra_virtual():
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
 
 def compra_virtual_de_200_ventas():
-    localvirtual.registrar_producto(remera_m)
-    localvirtual.registrar_producto(pulsera)
-    localvirtual.registrar_producto(remera_s)
+    localvirtual.registrar_producto(remera_l)
+    localvirtual.registrar_producto(media)
+    localvirtual.registrar_producto(remera_xl)
     remera_s.agregar_categoria("remera de futbol")
     remera_m.agregar_categoria("remera de basquet")
     localvirtual.recargar_stock(100,500)
@@ -353,12 +351,27 @@ def compra_virtual_de_200_ventas():
     return localvirtual.ventas_del_dia()
 
 def compra_fisica_de_200_unidades():
-    remera_m.precio = 4500
-    pulsera.precio = 50
-    remera_s.precio = 4500
     localfisico.registrar_producto(remera_m)
     localfisico.registrar_producto(pulsera)
     localfisico.registrar_producto(remera_s)
+    localfisico.recargar_stock(100,500)
+    localfisico.recargar_stock(1098,1000)
+    localfisico.recargar_stock(99,2000)
+    for i in range(100):
+        localfisico.realizar_compra(100,1) # 4500 * 100 = 450000 
+    for i in range(50):
+        localfisico.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
+    for i in range(50):
+        localfisico.realizar_compra(99,1) # 4500 * 50 = 225000
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
+    return localfisico.ventas_del_dia()
+
+
+def compra_fisica_200():
+    localfisico.registrar_producto(remera_l)
+    localfisico.registrar_producto(media)
+    localfisico.registrar_producto(remera_xl)
     localfisico.recargar_stock(100,500)
     localfisico.recargar_stock(1098,1000)
     localfisico.recargar_stock(99,2000)
