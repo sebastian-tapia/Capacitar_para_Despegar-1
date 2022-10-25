@@ -52,6 +52,8 @@ class Local:
         self.productos=[]
         self.codigos=[]
         self.ventas=[]
+        self.act_precio= BusquedaEnProductos()
+        #self.act_precio_nombre = BusquedaEnProductos()
 
     def reiniciar_listas(self):
         self.productos.clear()
@@ -171,10 +173,11 @@ class Local:
 
 
     def actualizar_precios_por_categoria(self,categoria,porcentaje):
-        categoria_reconocida = categoria.lower().strip()
-        for producto in self.productos:
-            if categoria_reconocida in producto["categorias"]:
-                producto["precio"] += producto["precio"] * porcentaje / 100
+        self.act_precio.categoria(categoria,porcentaje,self.productos)
+
+    def actualizar_precio_por_nombre(self,nombre_categoria,porcentaje):
+        self.act_precio.nombre(nombre_categoria,porcentaje,self.productos)
+
 
 #AQUI?
     def busqueda_categoria(self,categoria):
@@ -184,11 +187,6 @@ class Local:
             if categoria_reconocida in producto["categoria"]:
                 return categoria_encontrada
 
-    def actualizar_precio_por_nombre(self,nombre_categoria,porcentaje):
-        busqueda_reconocida = nombre_categoria.lower().strip()
-        for producto in self.productos:
-            if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
-                producto["precio"] += producto["precio"] * porcentaje / 100
 
 
     def stock_por_codigo(self,codigo):
@@ -197,6 +195,21 @@ class Local:
             if i["codigo"] == codigo:
                 stock = i["stock"]
         return stock
+
+
+class BusquedaEnProductos:
+    
+    def categoria(self,categoria,porcentaje,productos):
+        categoria_reconocida = categoria.lower().strip()
+        for producto in productos:
+            if categoria_reconocida in producto["categorias"]:
+                producto["precio"] += producto["precio"] * porcentaje / 100
+
+    def nombre(self,nombre_categoria,porcentaje,productos):
+        busqueda_reconocida = nombre_categoria.lower().strip()
+        for producto in productos:
+            if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
+                producto["precio"] += producto["precio"] * porcentaje / 100
 
 
 class Fisico(Local):
@@ -285,6 +298,12 @@ class Liquidacion:
         return precio / 2
 
 
+
+
+
+
+
+
 localvirtual = Virtual(1000)
 localfisico = Fisico(77500)
 remera_m = Prenda(100,"remera talle m", "remera", 4500)
@@ -297,5 +316,11 @@ liquidacion = Liquidacion()
 nueva = Nueva()
 
 
+
+remera_l = Prenda(100,"remera talle m", "remera", 4500)
+media = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_xl = Prenda(99,"remera de talle s", "remera", 4500)
+campera_m = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_s = Prenda(444,"pantalon talle m", "pantalon", 6000)
 
 
