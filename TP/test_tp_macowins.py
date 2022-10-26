@@ -64,14 +64,14 @@ def test_cargar_stock_a_un_producto_registrado_y_preguntar_si_tiene_stock_devuel
 
 
 ####################### EJERCICIO 4 #######################
-"""
+
 def test_precio_final_remera_m_y_sea_turista_es_4500():
     assert remera_m.calcular_precio_final(True)==4500
 
 def test_precio_final_pulserita_y_no_sea_turista_es_60_5():
     assert pulsera.calcular_precio_final(False)==60.5
 
-"""
+
 ####################### EJERCICIO 5 #######################
 
 def test_agrego_2_productos_distintas_categorias_deberia_devolver_2():
@@ -114,14 +114,14 @@ def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_venta
 
 
 ####################### EJERCICIO 7 #######################
-"""
+
 def test_remueve_todos_los_productos_con_stock_en_0():
-    localfisico.reiniciar_listas()
-    localfisico.registrar_producto(remera_m)
-    localfisico.registrar_producto(remera_s)
-    localfisico.discontinuar_productos()
-    assert len(localfisico.productos) == 0
-"""
+    localf=Fisico(3250)
+    localf.reiniciar_listas()
+    localf.registrar_producto(remera_m)
+    localf.registrar_producto(remera_s)
+    assert len(localf.productos) == 0
+
 def test_elimina_el_producto_sin_stock_de_tres_productos_la_lista_productos_debe_ser_2():
     localfisico.reiniciar_listas()
     localfisico.registrar_producto(remera_m)

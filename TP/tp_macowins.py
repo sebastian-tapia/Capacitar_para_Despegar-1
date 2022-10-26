@@ -259,12 +259,12 @@ class Prenda:
         return self.estado.precio(self.precio)
 
 
-    # def calcular_precio_final(self, es_extranjero):
-    #     if self.diccionario["precio"] > 70 and es_extranjero:
-    #         return self.diccionario["precio"]
-    #     else:
-    #         costo_final = self.diccionario["precio"] * 1.21
-    #         return costo_final
+    def calcular_precio_final(self, es_extranjero):
+        if self.precio > 70 and es_extranjero:
+            return self.precio
+        else:
+            costo_final = self.precio* 1.21
+            return costo_final
 
     def categoria(self,busquedaCategoria):
         categoria_reconocida = busquedaCategoria.lower().strip()
