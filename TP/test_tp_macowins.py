@@ -384,3 +384,5 @@ def compra_fisica_200():
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localfisico.ventas_del_dia()
+
+    #haciendo Merge
