@@ -1,3 +1,5 @@
+from threading import local
+
 from tp_macowins import *
 import pytest
 
@@ -115,12 +117,12 @@ def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_venta
 
 ####################### EJERCICIO 7 #######################
 
-def test_remueve_todos_los_productos_con_stock_en_0():
-    localf=Fisico(3250)
-    localf.reiniciar_listas()
-    localf.registrar_producto(remera_m)
-    localf.registrar_producto(remera_s)
-    assert len(localf.productos) == 0
+# def test_remueve_todos_los_productos_con_stock_en_0():
+#     localf=Fisico(3250)
+#     localf.reiniciar_listas()
+#     localf.registrar_producto(remera_m)
+#     localf.registrar_producto(remera_s)
+#     assert len(localf.productos) == 0
 
 def test_elimina_el_producto_sin_stock_de_tres_productos_la_lista_productos_debe_ser_2():
     localfisico.reiniciar_listas()
@@ -207,7 +209,7 @@ def test_tres_productos_mas_vendidos_debe_devolver_los_nombres_de_los_tres_produ
 def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_mal_escrita_en_un_50_porciento_debe_actualizar_el_precio_a_6750():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precios_por_categoria(" reMera ",50)
+    localfisico.actualizar_precio_segun(BusquedaPorNombre(" reMera "),50)
     assert localfisico.productos[0]["precio"] == 6750
     assert localfisico.productos[1]["precio"] == 6750
 
@@ -215,7 +217,7 @@ def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_ma
 def test_actualizar_precio_a_categoria_accesorios_mal_escrita_en_50_porciento_debe_actualizar_el_precio_a_75():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precios_por_categoria(" aCceSoriOs",50)
+    localfisico.actualizar_precio_segun(BusquedaPorCategoria(" aCceSoriOs"),50)
     assert localfisico.productos[2]["precio"] == 75
 
 
@@ -384,5 +386,13 @@ def compra_fisica_200():
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localfisico.ventas_del_dia()
+
+
+def actualizar_por_criterio_categoria_las_prendas_remera_un_50porciento():
+    localfisico.reiniciar_listas()
+    localfisico.registrar_producto(remera_m)
+    localfisico.actualizar_precio_segun(BusquedaPorCategoria("Remera"),50)
+    assert localfisico.productos[0]["precio"]==4750
+    
 
     #haciendo Merge
