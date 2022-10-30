@@ -7,6 +7,7 @@ from subprocess import getstatusoutput
 from xml.dom import registerDOMImplementation
 from datetime import date
 hoy = date.strftime(date.today(), "%Y-%m-%d")
+import csv
 
 
 
@@ -52,6 +53,7 @@ class Local:
         self.productos=[]
         self.codigos=[]
         self.ventas=[]
+        self.reporte = [["2022/10/29",100,45000]]
         #self.act_precio= BusquedaEnProductos()
         #self.act_precio_nombre = BusquedaEnProductos()
 
@@ -197,6 +199,25 @@ class Local:
                 stock = i["stock"]
         return stock
 
+
+    def reporte_diario(self):
+        self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
+        with open("reporte.csv", "w", newline="") as file:
+            writer = csv.writer(file, delimiter=",")
+            writer.writerows(self.reporte)
+
+    def comprar(self):
+        localfisico.registrar_producto(remera_m)
+        localfisico.registrar_producto(remera_s)
+        localfisico.registrar_producto(pulsera)
+        localfisico.recargar_stock(100,100)
+        localfisico.recargar_stock(99,100)
+        localfisico.recargar_stock(1098,100)
+        localfisico.realizar_compra(100,5)
+        localfisico.realizar_compra(1098,5)
+        localfisico.realizar_compra(99,5)
+
+        
 class BusquedaPorNombre:
     def __init__(self,expresion_de_nombre):
         self.nombre=expresion_de_nombre
