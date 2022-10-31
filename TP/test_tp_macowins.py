@@ -1,5 +1,4 @@
 from threading import local
-
 from tp_macowins import *
 import pytest
 
@@ -82,26 +81,6 @@ def test_agrego_2_productos_distintas_categorias_deberia_devolver_2():
     localfisico.registrar_producto(pulsera)
     assert localfisico.contar_categorias() == 2
 
-<<<<<<< HEAD
-def test_realizar_una_compra_de_codigo_existente_con_stock_insuficiente_debe_entrar_en_excepcion():
-    reiniciar_listas()
-    with pytest.raises(ValueError) as auxiliar:
-        registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-        realizar_compra(100, 150)
-    assert str(auxiliar.value) == "No hay stock suficiente para la venta"
-<<<<<<< HEAD
-    #assert len(ventas) == 2
-=======
-
-
-def test_realizar_una_compra_de_codigo_existente_con_stock_insuficiente_no_debe_aumentar_ventas():
-    reiniciar_listas()
-    with pytest.raises(ValueError) as auxiliar:
-        registrar_tres_productos_recargar_a_dos_y_comprar_a_dos()
-        realizar_compra(100, 150)
-    assert len(ventas) == 2
->>>>>>> 37e31319cdcf87edbd22458ed216b63c7e6d8c8f
-=======
 def test_registrar_2_productos_misma_categoria_devuelve_1():
     localfisico.reiniciar_listas()
     localfisico.registrar_producto(remera_m)
@@ -110,7 +89,6 @@ def test_registrar_2_productos_misma_categoria_devuelve_1():
 
 
 ####################### EJERCICIO 6 #######################
->>>>>>> 34f8b7479c9127cb35d55b5c1e0526c052f493cb
 
 def test_realizar_una_compra_de_un_producto_decrementa_su_stock_de_100_a_80():
     localfisico.reiniciar_listas()
@@ -138,12 +116,12 @@ def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_venta
 
 ####################### EJERCICIO 7 #######################
 
-# def test_remueve_todos_los_productos_con_stock_en_0():
-#     localf=Fisico(3250)
-#     localf.reiniciar_listas()
-#     localf.registrar_producto(remera_m)
-#     localf.registrar_producto(remera_s)
-#     assert len(localf.productos) == 0
+def test_remueve_todos_los_productos_con_stock_en_0():
+    localf=Fisico(3250)
+    localf.reiniciar_listas()
+    localf.registrar_producto(remera_m)
+    localf.registrar_producto(remera_s)
+    assert len(localf.productos) == 0
 
 def test_elimina_el_producto_sin_stock_de_tres_productos_la_lista_productos_debe_ser_2():
     localfisico.reiniciar_listas()
@@ -304,46 +282,6 @@ def test_ganancia_del_dia():
 ################ Funciones auxiliares ################
 
 def realizar_compra_a_cinco_productos():
-<<<<<<< HEAD
-    realizar_compra(100,25)
-    realizar_compra(99,50)
-    realizar_compra(1098,100)
-    realizar_compra(555,150)
-    realizar_compra(444,200)
-<<<<<<< HEAD
-    assert len(ventas) == 5
-    assert contar_categorias(productos) == 4
-    assert productos_mas_vendidos(3)  == ["pantalon talle m", "campera talle l", "pulserita de tela verde"]
-
-
-#####################  Tests de ejercicio 11  #####################
-#se usa la lista productos generada en el test anterior
-#test de mayusculas,espacios
-#hacer que busque desde categoria no de posicion
-=======
->>>>>>> 37e31319cdcf87edbd22458ed216b63c7e6d8c8f
-
-def registrar_tres_productos_recargar_a_dos_y_comprar_a_dos():
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100,200)
-    recargar_stock(99,50)
-    realizar_compra(100, 100)
-    realizar_compra(99,50)
-
-<<<<<<< HEAD
-
-### probar solo con un assert
-=======
-def registrar_tres_productos_y_recargar_stock_a_dos():
-    registrar_producto(remera_talle_m)
-    registrar_producto(remera_talle_s)
-    registrar_producto(pulserita)
-    recargar_stock(100, 200)
-    recargar_stock(1098, 200)
->>>>>>> 37e31319cdcf87edbd22458ed216b63c7e6d8c8f
-=======
     localfisico.realizar_compra(100,25)
     localfisico.realizar_compra(99,50)
     localfisico.realizar_compra(1098,100)
@@ -448,13 +386,4 @@ def compra_fisica_200():
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localfisico.ventas_del_dia()
 
-
-def actualizar_por_criterio_categoria_las_prendas_remera_un_50porciento():
-    localfisico.reiniciar_listas()
-    localfisico.registrar_producto(remera_m)
-    localfisico.actualizar_precio_segun(BusquedaPorCategoria("Remera"),50)
-    assert localfisico.productos[0]["precio"]==4750
-    
-
     #haciendo Merge
->>>>>>> 34f8b7479c9127cb35d55b5c1e0526c052f493cb

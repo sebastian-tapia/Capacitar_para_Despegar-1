@@ -1,15 +1,20 @@
 class Asiento:
     def __init__(self):
-        self.libre = 0
-        
-    def comprarlo(self):
-        pass
+        self.comprador = None
+        self.estado = Libre()
+    
+    def venderse(self, cliente):
+        if not esta_vendido():
+            self.comprador = cliente
 
-    def reservarlo(self):
-        pass
+    def vendido_a(self,cliente):
+        return self.comprador == cliente
+    
+    def esta_vendido(self):
+        return self.comprador is not None 
 
-    def des_reservado(self):
-        pass
+    
+
 
 
 class Cliente:
