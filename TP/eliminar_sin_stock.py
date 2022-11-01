@@ -1,6 +1,8 @@
 from tp_macowins import *
 from datetime import datetime
+import subprocess
 
+subprocess.call(["zenity", "--info",  '--title=Semana terminada', "--text=Se eliminaran los productos sin stock", "--display=:0"])
 
 
 def main():
