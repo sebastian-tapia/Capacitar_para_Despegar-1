@@ -1,3 +1,4 @@
+from threading import local
 from tp_macowins import *
 import pytest
 
@@ -207,7 +208,7 @@ def test_tres_productos_mas_vendidos_debe_devolver_los_nombres_de_los_tres_produ
 def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_mal_escrita_en_un_50_porciento_debe_actualizar_el_precio_a_6750():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precios_por_categoria(" reMera ",50)
+    localfisico.actualizar_precio_segun(BusquedaPorNombre(" reMera "),50)
     assert localfisico.productos[0]["precio"] == 6750
     assert localfisico.productos[1]["precio"] == 6750
 
@@ -215,7 +216,7 @@ def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_ma
 def test_actualizar_precio_a_categoria_accesorios_mal_escrita_en_50_porciento_debe_actualizar_el_precio_a_75():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precios_por_categoria(" aCceSoriOs",50)
+    localfisico.actualizar_precio_segun(BusquedaPorCategoria(" aCceSoriOs"),50)
     assert localfisico.productos[2]["precio"] == 75
 
 

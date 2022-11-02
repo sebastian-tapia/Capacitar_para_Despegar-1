@@ -7,6 +7,7 @@ from subprocess import getstatusoutput
 from xml.dom import registerDOMImplementation
 from datetime import date
 hoy = date.strftime(date.today(), "%Y-%m-%d")
+import csv
 
 
 
@@ -52,7 +53,8 @@ class Local:
         self.productos=[]
         self.codigos=[]
         self.ventas=[]
-        self.act_precio= BusquedaEnProductos()
+        self.reporte = [["2022/10/29",100,45000]]
+        #self.act_precio= BusquedaEnProductos()
         #self.act_precio_nombre = BusquedaEnProductos()
 
     def reiniciar_listas(self):
@@ -172,12 +174,13 @@ class Local:
         return nombres_mas_vendidos[:cantidad]
 
 
-    def actualizar_precios_por_categoria(self,categoria,porcentaje):
-        self.act_precio.categoria(categoria,porcentaje,self.productos)
+    # def actualizar_precios_por_categoria(self,categoria,porcentaje):
+    #     self.act_precio.categoria(categoria,porcentaje,self.productos)
 
-    def actualizar_precio_por_nombre(self,nombre_categoria,porcentaje):
-        self.act_precio.nombre(nombre_categoria,porcentaje,self.productos)
-
+    # def actualizar_precio_por_nombre(self,nombre_categoria,porcentaje):
+    #     self.act_precio.nombre(nombre_categoria,porcentaje,self.productos)
+    def actualizar_precio_segun(self,criterio,porcentaje):
+        criterio.correponde_al_producto(self.productos,porcentaje)
 
 #AQUI?
     def busqueda_categoria(self,categoria):
@@ -197,19 +200,57 @@ class Local:
         return stock
 
 
-class BusquedaEnProductos:
-    
-    def categoria(self,categoria,porcentaje,productos):
-        categoria_reconocida = categoria.lower().strip()
-        for producto in productos:
-            if categoria_reconocida in producto["categorias"]:
-                producto["precio"] += producto["precio"] * porcentaje / 100
+    def reporte_diario(self):
+        self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
+        with open("reporte.csv", "w", newline="") as file:
+            writer = csv.writer(file, delimiter=",")
+            writer.writerows(self.reporte)
 
-    def nombre(self,nombre_categoria,porcentaje,productos):
-        busqueda_reconocida = nombre_categoria.lower().strip()
+    def comprar(self):
+        localfisico.registrar_producto(remera_m)
+        localfisico.registrar_producto(remera_s)
+        localfisico.registrar_producto(pulsera)
+        localfisico.recargar_stock(100,100)
+        localfisico.recargar_stock(99,100)
+        localfisico.recargar_stock(1098,100)
+        localfisico.realizar_compra(100,5)
+        localfisico.realizar_compra(1098,5)
+        localfisico.realizar_compra(99,5)
+
+        
+class BusquedaPorNombre:
+    def __init__(self,expresion_de_nombre):
+        self.nombre=expresion_de_nombre
+
+    def correponde_al_producto(self,productos,porcentaje):
+
+        busqueda_reconocida = self.nombre.lower().strip()
         for producto in productos:
             if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
                 producto["precio"] += producto["precio"] * porcentaje / 100
+
+class BusquedaPorCategoria:
+    def __init__(self,una_categoria):
+        self.categoria=una_categoria
+
+    def correponde_al_producto(self,productos,porcentaje):
+        categoria_reconocida = self.categoria.lower().strip()
+        for producto in productos:
+            if categoria_reconocida in producto["categorias"]:
+                producto["precio"] += producto["precio"] * porcentaje / 100
+# class BusquedaEnProductos:
+    
+#     def categoria(self,categoria,porcentaje,productos):
+#         categoria_reconocida = categoria.lower().strip()
+#         for producto in productos:
+#             if categoria_reconocida in producto["categorias"]:
+#                 producto["precio"] += producto["precio"] * porcentaje / 100
+
+#     def nombre(self,nombre_categoria,porcentaje,productos):
+#         busqueda_reconocida = nombre_categoria.lower().strip()
+#         for producto in productos:
+#             if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
+#                 producto["precio"] += producto["precio"] * porcentaje / 100
 
 
 class Fisico(Local):
