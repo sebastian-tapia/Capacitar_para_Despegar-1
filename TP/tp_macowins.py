@@ -53,7 +53,7 @@ class Local:
         self.productos=[]
         self.codigos=[]
         self.ventas=[]
-        self.reporte = [["2022/10/29",100,45000]]
+        self.reporte = [["2022-10-29",100,45000]]
         #self.act_precio= BusquedaEnProductos()
         #self.act_precio_nombre = BusquedaEnProductos()
 
@@ -75,9 +75,16 @@ class Local:
             raise ValueError("Codigo de producto ingresado no existe")
         else:
             for producto in self.productos:
-                if producto["codigo"] == codigo:
-                    producto["stock"] += stock
+                if producto.codigo == codigo:
+                    producto.aumentar_stock(stock)
 
+    #prenda
+    def aumentar_stock(self,stock):
+        self.stock += stock
+
+
+
+    
 
     def hay_stock(self,codigo):
         for producto in self.productos:
@@ -118,10 +125,10 @@ class Local:
                 self.productos.remove(producto)
                 self.codigos.remove(producto["codigo"])
 
-        for producto in self.productos:
-            if producto["stock"] == 0:
-                self.productos.remove(producto)
-                self.codigos.remove(producto["codigo"])
+        # for producto in self.productos:
+        #     if producto["stock"] == 0:
+        #         self.productos.remove(producto)
+        #         self.codigos.remove(producto["codigo"])
 
 
     def ventas_del_dia(self):
@@ -175,16 +182,8 @@ class Local:
 
 
     def actualizar_precio_segun(self,criterio,porcentaje):
-        criterio.corresponde_al_producto(self.productos,porcentaje)
 
-#AQUI?
-    def busqueda_categoria(self,categoria):
-        categoria_encontrada = True
-        categoria_reconocida = categoria.lower().strip()
-        for producto in self.productos:
-            if categoria_reconocida in producto["categoria"]:
-                return categoria_encontrada
-
+        return criterio.corresponde_al_producto(self.productos,porcentaje)
 
 
     def stock_por_codigo(self,codigo):
@@ -199,7 +198,10 @@ class Local:
         self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
         with open("reporte.csv", "w", newline="") as file:
             writer = csv.writer(file, delimiter=",")
+            
             writer.writerows(self.reporte)
+    
+
 
     def comprar(self):
         localfisico.registrar_producto(remera_m)
@@ -216,46 +218,59 @@ class Local:
 class PorNombre:
     def __init__(self,expresion_de_nombre):
         self.nombre=expresion_de_nombre
+        self.lista = []
 
     def corresponde_al_producto(self,productos,porcentaje):
         busqueda_reconocida = self.nombre.lower().strip()
         for producto in productos:
             if re.search(busqueda_reconocida, producto["nombre"], re.IGNORECASE):
                 producto["precio"] += producto["precio"] * porcentaje / 100
+                self.lista.append(producto)
+        return self.lista
 
 class PorCategoria:
     def __init__(self,una_categoria):
         self.categoria=una_categoria
+        self.lista = []
 
     def corresponde_al_producto(self,productos,porcentaje):
         categoria_reconocida = self.categoria.lower().strip()
         for producto in productos:
             if categoria_reconocida in producto["categorias"]:
                 producto["precio"] += producto["precio"] * porcentaje / 100
-
+                self.lista.append(producto)
+        return self.lista
+    
+    # def listar(self):
+    #     return self.lista
 
 class PorPrecio:
     def __init__(self,precio):
         self.precio = precio
-
+        self.lista = []
     def corresponde_al_producto(self,productos,valor):
         for producto in productos:
             if  producto["precio"]<valor:
                 producto["precio"]= valor
+                self.lista.append(producto)
+        return self.lista
 
 
 class PorStock:
+    def __init__(self):
+        self.lista = []
     def corresponde_al_producto(self,productos,valor):
         for producto in productos:
             if producto["stock"] > 0:
                 producto["precio"] += valor
+                self.lista.append(producto)
+        return self.lista
 
 
-class PorOposicion:        
-    def corresponde_al_producto(self,productos,valor):
-        for producto in productos:
-            if producto["precio"] > valor and producto["stock"] == 0:
-                producto["precio"] = valor
+
+# class PorOposicion:        
+#     negar el resto de busquedas
+
 
 
 
@@ -292,15 +307,17 @@ class Prenda:
         self.stock = 0
         self.estado = Nueva()
 
-        self.producto = {   "codigo": self.codigo,
-                            "nombre": self.nombre,
-                            "categorias": self.categorias,
-                            "precio": self.precio,
-                            "stock": self.stock}
+        # self.producto = {   "codigo": self.codigo,
+        #                     "nombre": self.nombre,
+        #                     "categorias": self.categorias,
+        #                     "precio": self.precio,
+        #                     "stock": self.stock}
 
     def cambiar_estado(self,estado_nuevo):
         self.estado = estado_nuevo
 
+    def ver_stock(self):
+        self.stock
 
     def precio_estado(self):
         return self.estado.precio(self.precio)
