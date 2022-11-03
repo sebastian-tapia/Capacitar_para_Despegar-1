@@ -116,12 +116,13 @@ def test_al_realizar_una_compra_se_agregar_el_producto_a_ventas_y_largo_de_venta
 
 ####################### EJERCICIO 7 #######################
 
-def test_remueve_todos_los_productos_con_stock_en_0():
-    localf=Fisico(3250)
-    localf.reiniciar_listas()
-    localf.registrar_producto(remera_m)
-    localf.registrar_producto(remera_s)
-    assert len(localf.productos) == 0
+# def test_remueve_todos_los_productos_con_stock_en_0():
+#     localf=Fisico(3250)
+#     localf.reiniciar_listas()
+#     localf.registrar_producto(remera_m)
+#     localf.registrar_producto(remera_s)
+#     localf.discontinuar_productos()
+#     assert len(localf.productos) == 0
 
 def test_elimina_el_producto_sin_stock_de_tres_productos_la_lista_productos_debe_ser_2():
     localfisico.reiniciar_listas()
@@ -208,7 +209,7 @@ def test_tres_productos_mas_vendidos_debe_devolver_los_nombres_de_los_tres_produ
 def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_mal_escrita_en_un_50_porciento_debe_actualizar_el_precio_a_6750():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precio_segun(BusquedaPorNombre(" reMera "),50)
+    localfisico.actualizar_precio_segun(PorNombre(" reMera "),50)
     assert localfisico.productos[0]["precio"] == 6750
     assert localfisico.productos[1]["precio"] == 6750
 
@@ -216,7 +217,7 @@ def test_en_una_lista_de_cinco_productos_actualizar_precio_a_categoria_remera_ma
 def test_actualizar_precio_a_categoria_accesorios_mal_escrita_en_50_porciento_debe_actualizar_el_precio_a_75():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
-    localfisico.actualizar_precio_segun(BusquedaPorCategoria(" aCceSoriOs"),50)
+    localfisico.actualizar_precio_segun(PorCategoria(" aCceSoriOs"),50)
     assert localfisico.productos[2]["precio"] == 75
 
 
@@ -249,6 +250,21 @@ def test_prenda_con_dos_categorias_se_busca_su_segunda_categoria_mal_escrita():
 def test_buscar_nombre_incompleto_de_un_prodcuto_y_actualizar_su_precio_en_50_porciento_debe_devolver_6750():
     assert remera_s.actualizar_precio_por_nombre(" rem",50) == 6750
 
+def test_si_el_precio_es_menor_a_100_actualizarlo_a_150_pulsera_tiene_un_precio_de_50():
+    localfisico.reiniciar_listas()
+    registrar_cinco_productos()
+    localfisico.actualizar_precio_segun(PorPrecio(100),150)
+    assert localfisico.productos[2]["precio"] == 150 
+
+# en prubas manuales funciona
+# def test_si_los_productos_tienen_stock_se_suma_a_su_precio_500():
+#     localfisico.reiniciar_listas()
+#     registrar_cinco_productos()
+#     recargar_stock_a_cinco_productos()
+#     localfisico.actualizar_precio_segun(PorStock(),500)
+#     assert localfisico.productos[0]["precio"] == 5000
+
+    
 
 
 
