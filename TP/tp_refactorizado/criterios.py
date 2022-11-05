@@ -1,8 +1,19 @@
+from datetime import date
+hoy = date.strftime(date.today(), "%Y-%m-%d")
 
 class PorCategoria:
-    def __init__(self,expresion_de_nombre):
-        self.nombre=expresion_de_nombre
+  def __init__(self, categoria):
+    self.categoria = categoria
 
-    def corresponde(self,producto):
-        busqueda_reconocida = self.nombre.lower().strip()
-        return busqueda_reconocida==producto
+  def aplica_a(self, producto):
+    
+    return producto.es_de_categoria(self.categoria.lower().strip())
+
+class PorNombre:
+  def __init__(self, patron):
+    self.patron = patron
+
+  def aplica_a(self, producto):
+    return producto.es_de_nombre(self.patron)
+
+
