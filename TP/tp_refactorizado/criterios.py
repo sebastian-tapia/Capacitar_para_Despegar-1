@@ -1,6 +1,4 @@
 
-from datetime import date
-hoy = date.strftime(date.today(), "%Y-%m-%d")
 
 class PorCategoria:
     def __init__(self, categoria):
@@ -29,4 +27,12 @@ class PorPrecio:
 class PorStock:
 
     def aplica_a(self, producto):
-        return producto.hay_stock(self)
+        return producto.hay_stock()
+
+
+class PorOposicion:
+    def __init__(self,criterio):
+        self.criterio = criterio
+
+    def aplica_a(self, producto):
+        return not self.criterio.aplica_a(producto)

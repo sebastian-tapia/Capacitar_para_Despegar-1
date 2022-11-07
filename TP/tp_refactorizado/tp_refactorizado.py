@@ -11,6 +11,7 @@ class Local:
         self.productos=[]
         self.ventas=[]
         self.codigos=[]
+        self.reporte = ["Fecha", "Cantidad de Ventas", "Valor Ventas del día"]
         
 
 
@@ -28,7 +29,6 @@ class Local:
                 self.codigos.append(objeto.codigo_())
     
     def recargar_stock(self,objeto,cantidad):
-        
         objeto.recargar_stock(cantidad)
 
     def contar_categorias(self):
@@ -116,10 +116,12 @@ class Local:
                 nombres_mas_vendidos.append(producto["nombre"])
         return nombres_mas_vendidos[:cantidad]
 
+
     def actualizar_precio_segun(self,criterio,valor):
         for producto in self.productos:
             if criterio.aplica_a(producto):
-                producto.actualizar_precio(criterio,valor)
+                producto.actualizar_precio(valor)
+    
     
     def listar_por(self,criterio):
         return [ producto for producto in self.productos if criterio.aplica_a(producto)]

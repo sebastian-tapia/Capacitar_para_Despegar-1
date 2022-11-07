@@ -1,3 +1,5 @@
+from criterios import *
+
 
 class Prenda:
     def __init__(self,codigo,nombre,categoria,precio):
@@ -37,17 +39,15 @@ class Prenda:
     def es_precio_menor_a(self,precio):
         return self.precio < precio
 
-    def actualizar_precio(self,criterio,valor):
-        if "PorCategoria" in str(criterio) or "PorNombre" in str(criterio):
-            self.precio += self.precio * valor / 100
-        elif "PorPrecio" in str(criterio) or "PorStock" in str(criterio):
-            self.precio = valor
-        else:
-            self.precio = valor
+    def actualizar_precio(self,valor):
+        self.precio += self.precio * valor / 100
+        
+
 
     def cambiar_estado(self,estado_nuevo):
         self.estado = estado_nuevo
         self.precio=self.estado.precio(self.precio)
+
 
     def calcular_precio_final(self, es_extranjero):
         if self.precio > 70 and es_extranjero:
