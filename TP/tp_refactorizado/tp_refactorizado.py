@@ -29,7 +29,10 @@ class Local:
                 self.codigos.append(objeto.codigo_())
     
     def recargar_stock(self,objeto,cantidad):
-        objeto.recargar_stock(cantidad)
+        if objeto.codigo in self.codigos:
+            objeto.recargar_stock(cantidad)
+        else:
+            raise ValueError("El producto no esta registrado")
 
     def contar_categorias(self):
         categorias = []
