@@ -32,4 +32,4 @@ def test_realizar_una_compra_de_un_producto_decrementa_su_stock_de_100_a_80():
     localfisico.recargar_stock(remera_s,100)
     localfisico.realizar_compra(99,20)
     assert remera_s.stock_() == 80      
-Footer
+

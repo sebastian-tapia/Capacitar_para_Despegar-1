@@ -53,20 +53,20 @@ def compra_virtual():
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
 
 def compra_virtual_de_200_ventas():
-    localvirtual.registrar_producto(remera_l)
-    localvirtual.registrar_producto(media)
-    localvirtual.registrar_producto(remera_xl)
+    localvirtual.registrar_producto(campera_l)
+    localvirtual.registrar_producto(pantalon_m)
+    localvirtual.registrar_producto(buzo_m)
     remera_s.agregar_categoria("remera de futbol")
     remera_m.agregar_categoria("remera de basquet")
-    localvirtual.recargar_stock(100,500)
-    localvirtual.recargar_stock(1098,1000)
-    localvirtual.recargar_stock(99,2000)
+    localvirtual.recargar_stock(555,500)
+    localvirtual.recargar_stock(444,1000)
+    localvirtual.recargar_stock(333,2000)
     for i in range(100):
-        localvirtual.realizar_compra(100,1) # 4500 * 100 = 450000 
+        localvirtual.realizar_compra(555,1) # 4500 * 100 = 450000 
     for i in range(50):
-        localvirtual.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
+        localvirtual.realizar_compra(444,1) # 50 * 50 = 2500        Total  677500
     for i in range(50):
-        localvirtual.realizar_compra(99,1) # 4500 * 50 = 225000
+        localvirtual.realizar_compra(333,1) # 4500 * 50 = 225000
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localvirtual.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localvirtual.ventas_del_dia()
@@ -90,18 +90,18 @@ def compra_fisica_de_200_unidades():
 
 
 def compra_fisica_200():
-    localfisico.registrar_producto(remera_l)
-    localfisico.registrar_producto(media)
-    localfisico.registrar_producto(remera_xl)
-    localfisico.recargar_stock(100,500)
-    localfisico.recargar_stock(1098,1000)
-    localfisico.recargar_stock(99,2000)
+    localfisico.registrar_producto(campera_l)
+    localfisico.registrar_producto(pantalon_m)
+    localfisico.registrar_producto(buzo_m)
+    localfisico.recargar_stock(555,500)
+    localfisico.recargar_stock(444,1000)
+    localfisico.recargar_stock(333,2000)
     for i in range(100):
-        localfisico.realizar_compra(100,1) # 4500 * 100 = 450000 
+        localfisico.realizar_compra(555,1) # 4500 * 100 = 450000 
     for i in range(50):
-        localfisico.realizar_compra(1098,1) # 50 * 50 = 2500        Total  677500
+        localfisico.realizar_compra(444,1) # 50 * 50 = 2500        Total  677500
     for i in range(50):
-        localfisico.realizar_compra(99,1) # 4500 * 50 = 225000
+        localfisico.realizar_compra(333,1) # 4500 * 50 = 225000
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localfisico.ventas_del_dia()

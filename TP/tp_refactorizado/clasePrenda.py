@@ -33,9 +33,17 @@ class Prenda:
     
     def es_de_nombre(self,name):
         return self.nombre==name
+    
+    def es_precio_menor_a(self,precio):
+        return self.precio < precio
 
-    def actualizar_precio_segun_porcentaje(self,porcentaje):
-        self.precio+=self.precio * porcentaje / 100
+    def actualizar_precio(self,criterio,valor):
+        if "PorCategoria" in str(criterio) or "PorNombre" in str(criterio):
+            self.precio += self.precio * valor / 100
+        elif "PorPrecio" in str(criterio) or "PorStock" in str(criterio):
+            self.precio = valor
+        else:
+            self.precio = valor
 
     def cambiar_estado(self,estado_nuevo):
         self.estado = estado_nuevo

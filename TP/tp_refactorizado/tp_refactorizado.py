@@ -4,6 +4,8 @@ from criterios import *
 from datetime import date
 hoy = date.strftime(date.today(), "%Y-%m-%d")
 from operator import itemgetter
+
+
 class Local:
     def __init__(self):
         self.productos=[]
@@ -114,10 +116,31 @@ class Local:
                 nombres_mas_vendidos.append(producto["nombre"])
         return nombres_mas_vendidos[:cantidad]
 
-    def actualizar_precio_segund(self,criterio,porcentaje):
+    def actualizar_precio_segun(self,criterio,valor):
         for producto in self.productos:
             if criterio.aplica_a(producto):
-                producto.actualizar_precio_segun_porcentaje(porcentaje)
+                producto.actualizar_precio(criterio,valor)
+    
+    def listar_por(self,criterio):
+        return [ producto for producto in self.productos if criterio.aplica_a(producto)]
+
+
+
+    def registrar_cinco_productos(self):
+        localfisico.registrar_producto(remera_m)
+        localfisico.registrar_producto(remera_s)
+        localfisico.registrar_producto(pulsera)
+        localfisico.registrar_producto(campera_l)
+        localfisico.registrar_producto(pantalon_m)
+
+    def recargar_stock_a_cinco_productos(self):
+        localfisico.recargar_stock(remera_m,200)
+        localfisico.recargar_stock(remera_s,200)
+        localfisico.recargar_stock(pulsera,200)
+        localfisico.recargar_stock(campera_l,200)
+        localfisico.recargar_stock(pantalon_m,200)
+
+
     def reporte_diario(self):
         self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
         with open("reporte.csv", "w", newline="") as file:
@@ -164,19 +187,20 @@ pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
 remera_s = Prenda(99,"remera de talle s", "remera", 4500)
 campera_l = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m = Prenda(333,"buzo talle m", "buzo", 5500)
 promo_500 = Promocion(500)
 liquidacion = Liquidacion()
 nueva = Nueva()
 
 
 
-localvirtual = Virtual(1000)
-localfisico = Fisico(77500)
-remera_m = Prenda(100,"remera talle m", "remera", 4500)
-pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
-remera_s = Prenda(99,"remera de talle s", "remera", 4500)
-campera_l = Prenda(555,"campera talle l", "campera", 35000)
-pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
-promo_500 = Promocion(500)
-liquidacion = Liquidacion()
-nueva = Nueva()
+# localvirtual = Virtual(1000)
+# localfisico = Fisico(77500)
+# remera_m = Prenda(100,"remera talle m", "remera", 4500)
+# pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+# remera_s = Prenda(99,"remera de talle s", "remera", 4500)
+# campera_l = Prenda(555,"campera talle l", "campera", 35000)
+# pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
+# promo_500 = Promocion(500)
+# liquidacion = Liquidacion()
+# nueva = Nueva()
