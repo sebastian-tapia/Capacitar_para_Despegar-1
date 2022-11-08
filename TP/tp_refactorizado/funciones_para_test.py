@@ -1,6 +1,13 @@
 from tp_refactorizado import *
 ################ Funciones auxiliares ################
 
+def registrar_cinco_productos():
+    localfisico.registrar_producto(remera_m)
+    localfisico.registrar_producto(remera_s)
+    localfisico.registrar_producto(pulsera)
+    localfisico.registrar_producto(campera_l)
+    localfisico.registrar_producto(pantalon_m)
+
 def realizar_compra_a_cinco_productos():
     localfisico.realizar_compra(100,25)
     localfisico.realizar_compra(99,50)
@@ -9,18 +16,16 @@ def realizar_compra_a_cinco_productos():
     localfisico.realizar_compra(444,200)
 
 def recargar_stock_a_cinco_productos():
-    localfisico.recargar_stock(remera_m,200)
-    localfisico.recargar_stock(remera_s,200)
-    localfisico.recargar_stock(pulsera,200)
-    localfisico.recargar_stock(campera_l,200)
-    localfisico.recargar_stock(pantalon_m,200)
+    localfisico.recargar_stock(100,200)
+    localfisico.recargar_stock(99,200)
+    localfisico.recargar_stock(1098,200)
+    localfisico.recargar_stock(555,200)
+    localfisico.recargar_stock(444,200)
 
-def registrar_cinco_productos():
-    localfisico.registrar_producto(remera_m)
-    localfisico.registrar_producto(remera_s)
-    localfisico.registrar_producto(pulsera)
-    localfisico.registrar_producto(campera_l)
-    localfisico.registrar_producto(pantalon_m)
+def recargar_stock_a_tres_productos():
+    localfisico.recargar_stock(100,100)
+    localfisico.recargar_stock(99,100)
+    localfisico.recargar_stock(1098,100)
 
 def compra_fisico():
     localfisico.registrar_producto(remera_m)
@@ -106,4 +111,4 @@ def compra_fisica_200():
     localfisico.ventas.append({"codigo_producto":100,"cantidad":10,"fecha":"31-12-1990","precio_total":45000})
     return localfisico.ventas_del_dia()
 
-    #haciendo Merge
+    
