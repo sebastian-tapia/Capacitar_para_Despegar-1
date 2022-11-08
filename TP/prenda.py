@@ -6,7 +6,7 @@ class Prenda:
         self.codigo=codigo
         self.nombre=nombre
         self.precio=precio
-        self.categoria=categoria
+        self.categorias=[categoria]
         self.stock=0
         self.estado=Nueva()
 
@@ -19,25 +19,30 @@ class Prenda:
     def precio_(self):
         return int(self.precio)
     def categoria_(self):
-        return str(self.categoria)
+        return str(self.categorias)
     def stock_(self):
         return int(self.stock)
         
-    def recargar_stock(self,stock):
+    def recarga_stock(self,stock):
         self.stock+=stock
+
     def restar_stock(self,stock):
         self.stock-=stock
+
     def hay_stock(self):
-        return not self.stock==0
+        return self.stock > 0
     
-    def es_de_categoria(self,cate):
-        return self.categoria==cate
+    def es_de_categoria(self,categoria):
+        return categoria in self.categorias
     
+    def agregar_categoria(self,categoria):
+        self.categorias.append(categoria)
+
     def es_de_nombre(self,name):
         return self.nombre==name
     
-    def es_precio_menor_a(self,precio):
-        return self.precio < precio
+    # def es_precio_menor_a(self,precio):
+    #     return self.precio < precio
 
     def actualizar_precio(self,valor):
         self.precio += self.precio * valor / 100
@@ -71,15 +76,48 @@ class Liquidacion:
     def precio(self,precio):
         return precio / 2
 
+
+
 remera_m = Prenda(100,"remera talle m", "remera", 4500)
 pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
 remera_s = Prenda(99,"remera de talle s", "remera", 4500)
 campera_l = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m = Prenda(333,"buzo talle m", "buzo", 5500)
+
+remera_m_v2 = Prenda(100,"remera talle m", "remera", 4500)
+pulsera_v2 = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_s_v2 = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l_v2 = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_m_v2 = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m_v2 = Prenda(333,"buzo talle m", "buzo", 5500)
+
+remera_m_v3 = Prenda(100,"remera talle m", "remera", 4500)
+pulsera_v3 = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_s_v3 = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l_v3 = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_m_v3 = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m_v3 = Prenda(333,"buzo talle m", "buzo", 5500)
+
+remera_m_v4 = Prenda(100,"remera talle m", "remera", 4500)
+pulsera_v4 = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_s_v4 = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l_v4 = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_m_v4 = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m_v4 = Prenda(333,"buzo talle m", "buzo", 5500)
+
+remera_m_v5 = Prenda(100,"remera talle m", "remera", 4500)
+pulsera_v5 = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
+remera_s_v5 = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l_v5 = Prenda(555,"campera talle l", "campera", 35000)
+pantalon_m_v5 = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m_v5 = Prenda(333,"buzo talle m", "buzo", 5500)
+
+
+
+
+
 promo_500 = Promocion(500)
-
-
 promo_300=Promocion(300)
 liquidacion=Liquidacion()
 nueva=Nueva()
