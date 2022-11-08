@@ -46,7 +46,7 @@ class Prenda:
 
     def cambiar_estado(self,estado_nuevo):
         self.estado = estado_nuevo
-        self.precio=self.estado.precio(self.precio)
+        self.precio = self.estado.precio(self.precio)
 
 
     def calcular_precio_final(self, es_extranjero):
@@ -59,19 +59,26 @@ class Prenda:
 class Nueva:
     def precio(self,precio):
         return precio
+
 class Promocion:
     def __init__(self, promo):
         self.promo = promo
+
     def precio(self,precio):
         return precio - self.promo
+
 class Liquidacion:
     def precio(self,precio):
         return precio / 2
 
-
-remera_m=Prenda(100,"remera m","remera",4500)
+remera_m = Prenda(100,"remera talle m", "remera", 4500)
+pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
 remera_s = Prenda(99,"remera de talle s", "remera", 4500)
+campera_l = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
+buzo_m = Prenda(333,"buzo talle m", "buzo", 5500)
+promo_500 = Promocion(500)
+
 
 promo_300=Promocion(300)
 liquidacion=Liquidacion()
