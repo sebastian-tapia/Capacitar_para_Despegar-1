@@ -28,9 +28,11 @@ class Local:
                 self.productos.append(objeto)
                 self.codigos.append(objeto.codigo_())
     
-    def recargar_stock(self,objeto,cantidad):
-        if objeto.codigo in self.codigos:
-            objeto.recargar_stock(cantidad)
+    def recargar_stock(self,codigo,cantidad):
+        if codigo in self.codigos:    
+            for producto in self.productos:    
+                if producto.codigo == codigo:
+                    producto.recargar_stock(cantidad)
         else:
             raise ValueError("El producto no esta registrado")
 
@@ -76,6 +78,7 @@ class Local:
             if venta["fecha"] == hoy:
                 ventas += 1
         return ventas
+
     def valor_ventas_del_dia(self):
         total_ventas_del_dia = 0
         subtotal = 0
@@ -139,12 +142,17 @@ class Local:
         localfisico.registrar_producto(pantalon_m)
 
     def recargar_stock_a_cinco_productos(self):
-        localfisico.recargar_stock(remera_m,200)
-        localfisico.recargar_stock(remera_s,200)
-        localfisico.recargar_stock(pulsera,200)
-        localfisico.recargar_stock(campera_l,200)
-        localfisico.recargar_stock(pantalon_m,200)
+        localfisico.recargar_stock(100,200)
+        localfisico.recargar_stock(99,200)
+        localfisico.recargar_stock(1098,200)
+        localfisico.recargar_stock(555,200)
+        localfisico.recargar_stock(444,200)
 
+    def recargar_stock_a_tres_productos(self):
+        localfisico.recargar_stock(100,200)
+        localfisico.recargar_stock(99,200)
+        localfisico.recargar_stock(1098,200)
+        
 
     def reporte_diario(self):
         self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
