@@ -1,20 +1,20 @@
 import pytest
 from funciones_para_test import *
-from clasePrenda import *
-from tp_refactorizado import *
+from prenda import *
+from local import *
 
 ###############ejercicio 2##################
 
 
 def test_recarga_stock_20_a_un_producto_devuelve_20():
-    remera_m.recargar_stock(20)
+    remera_m.recarga_stock(20)
     assert remera_m.stock_() == 20
 
 
 def test_cargar_stock_a_un_producto_preguntar_si_tiene_stock_devuelve_True_():
     remera_m.restaurar_stock()
 
-    remera_m.recargar_stock(20)
+    remera_m.recarga_stock(20)
     assert remera_m.hay_stock()
 
 
@@ -56,3 +56,13 @@ def test_pulsera_en_liquidacion_precio_cambia_a_12_5():
 def test_pulsera_se_cambia_a_nueva_mantiene_su_precio_de_12_5():
     pulsera.cambiar_estado(Nueva())
     assert pulsera.precio == 12.5
+
+
+####################### Categorias #######################
+
+def test_producto_devuelve_si_es_de_categoria_remera():
+    assert remera_m.categorias == ["remera"]
+
+def test_se_agrega_categoria_a_remera_debe_devolver_dos_categorias():
+    remera_m.agregar_categoria("remera de futbol")
+    assert len(remera_m.categorias) == 2
