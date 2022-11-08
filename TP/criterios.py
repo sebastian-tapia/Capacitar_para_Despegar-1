@@ -1,4 +1,4 @@
-
+from prenda import *
 
 class PorCategoria:
     def __init__(self, categoria):
@@ -21,13 +21,13 @@ class PorPrecio:
         self.valor = valor
 
     def aplica_a(self, producto):
-        return producto.es_precio_menor_a(self.valor)
+        return self.valor > producto.precio
 
 
 class PorStock:
 
     def aplica_a(self, producto):
-        return producto.hay_stock()
+        return producto.stock > 0
 
 
 class PorOposicion:
@@ -35,4 +35,4 @@ class PorOposicion:
         self.criterio = criterio
 
     def aplica_a(self, producto):
-        return not self.criterio.aplica_a(producto)
+        return not (self.criterio.aplica_a(producto))
