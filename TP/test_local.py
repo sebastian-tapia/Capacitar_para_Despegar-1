@@ -1,6 +1,6 @@
 import pytest
 from funciones_para_test import *
-from tp_refactorizado import *
+from local import *
 
 ####################### Ejercicio 1 #######################
 
@@ -159,19 +159,55 @@ def test_act_precio_por_nombre_remera_en_un_50_porciento_devuelve_un_precio_de_6
     localfisico.actualizar_precio_segun(PorNombre("remera talle m"),50)
     assert remera_m.precio == 6750
 
-def test_act_precio_de_un_producto_en_un_50_porciento_si_su_valor_es_menor_a_5000():
-    localfisico.reiniciar_listas()
-    registrar_cinco_productos()
-    localfisico.actualizar_precio_segun(PorPrecio(5000),50)
-    assert remera_m.precio == 6750
-    assert remera_s.precio == 6750
-    #assert pulsera.precio == 75
+# def test_act_precio_de_un_producto_en_un_50_porciento_si_su_valor_es_menor_a_5000():
+#     localfisico.reiniciar_listas()
+#     registrar_cinco_productos_v2()
+#     localfisico.actualizar_precio_segun(PorPrecio(5000),50)
+#     assert remera_m_v2.precio == 6750
+#     assert remera_s_v2.precio == 6750
+#     assert pulsera_v2.precio == 75
 
 # def test_act_precio_de_productos_que_tengan_stock():
 #     localfisico.reiniciar_listas()
-#     registrar_cinco_productos()
+#     registrar_cinco_productos_v3()
 #     recargar_stock_a_tres_productos()
 #     localfisico.actualizar_precio_segun(PorStock(),50)
-#     assert remera_m.precio == 6750
-#     assert pulsera.precio == 75
-#     assert remera_s.precio == 6750
+#     assert remera_m_v3.stock == 100
+#     assert remera_m_v3.precio == 6750
+#     assert pulsera_v3.precio == 75
+#     assert remera_s_v3.precio == 6750
+
+def test_act_precio_por_opcion_de_criterio_stock_en_un_50_porciento():
+    localfisico.reiniciar_listas()
+    registrar_cinco_productos()
+    recargar_stock_a_tres_productos()
+    localfisico.actualizar_precio_segun(PorOposicion(PorStock()),50)
+    #assert campera_l.precio == 52500
+    assert pantalon_m.precio == 9000
+
+
+
+
+
+############# Ganancias de Sucursal Fisica #############
+
+def test_ganancia_del_dia_devuelve_4000000():
+    localfisico.reiniciar_listas()
+    compra_fisica_200()
+    assert localfisico.ganancia_diaria() == 4000000
+
+
+
+############# Ganancias de Sucursal Virtual #############
+
+
+def test_ganancia_del_dia_si_se_realizan_200_ventas_devuelve_2075000():
+    localvirtual.reiniciar_listas()
+    compra_virtual_de_200_ventas()
+    assert localvirtual.ganancia_diaria() == 2075000
+
+
+def test_ganancia_del_dia_si_se_realizan_50_ventas_devuelve_1017500():
+    localvirtual.reiniciar_listas()
+    compra_virtual_de_50_unidades()
+    assert localvirtual.ganancia_diaria() == 1017500
