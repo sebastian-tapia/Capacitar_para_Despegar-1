@@ -127,18 +127,12 @@ class Local:
         return [ producto for producto in self.productos if criterio.aplica_a(producto)]
 
 
-    def registrar_cinco_productos(self):
-        localfisico.registrar_producto(remera_m)
-        localfisico.registrar_producto(remera_s)
-        localfisico.registrar_producto(pulsera)
-        localfisico.registrar_producto(campera_l)
-        localfisico.registrar_producto(pantalon_m)
-
-    def recargar_stock_a_tres_productos(self):
-        localfisico.recargar_stock(100,200)
-        localfisico.recargar_stock(99,200)
-        localfisico.recargar_stock(1098,200)
-
+    def productos_sin_stock(self):
+        cont = 0
+        for producto in self.productos:
+            if producto.stock == 0:
+                cont += 1
+        return cont
 
     def reporte_diario(self):
         self.reporte.append([hoy, self.cantidad_ventas_del_dia(), self.valor_ventas_del_dia()])
@@ -221,5 +215,16 @@ promo_500 = Promocion(500)
 liquidacion = Liquidacion()
 nueva = Nueva()
 
+
+
+
+localfisico.registrar_producto(remera_m)
+localfisico.registrar_producto(pulsera)
+localfisico.registrar_producto(remera_s)
+localfisico.registrar_producto(campera_l)
+localfisico.registrar_producto(pantalon_m)
+localfisico.registrar_producto(buzo_m)
+localfisico.recargar_stock(100,100)
+localfisico.recargar_stock(1098,100)
 
 
