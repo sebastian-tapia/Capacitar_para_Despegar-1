@@ -38,6 +38,20 @@ def recargar_stock_a_tres_productos():
     localfisico.recargar_stock(99,100)
     localfisico.recargar_stock(1098,100)
 
+def reiniciar_precio_y_stocks_de_poductos():
+    remera_m.precio = 4500
+    pulsera.precio = 50
+    remera_s.precio = 4500
+    campera_l.precio = 35000
+    pantalon_m.precio = 6000
+    buzo_m.precio = 5500
+    remera_m.stock = 0
+    remera_s.stock = 0
+    pulsera.stock = 0
+    campera_l.stock = 0
+    buzo_m.stock = 0
+
+
 
 def realizar_compra_a_cinco_productos():
     localfisico.realizar_compra(100,25)

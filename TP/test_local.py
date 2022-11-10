@@ -159,30 +159,32 @@ def test_act_precio_por_nombre_remera_en_un_50_porciento_devuelve_un_precio_de_6
     localfisico.actualizar_precio_segun(PorNombre("remera talle m"),50)
     assert remera_m.precio == 6750
 
-# def test_act_precio_de_un_producto_en_un_50_porciento_si_su_valor_es_menor_a_5000():
-#     localfisico.reiniciar_listas()
-#     registrar_cinco_productos_v2()
-#     localfisico.actualizar_precio_segun(PorPrecio(5000),50)
-#     assert remera_m_v2.precio == 6750
-#     assert remera_s_v2.precio == 6750
-#     assert pulsera_v2.precio == 75
+def test_act_precio_de_un_producto_en_un_50_porciento_si_su_valor_es_menor_a_5000():
+    localfisico.reiniciar_listas()
+    reiniciar_precio_y_stocks_de_poductos()
+    registrar_cinco_productos()
+    localfisico.actualizar_precio_segun(PorPrecio(5000),50)
+    assert remera_m.precio == 6750
+    assert remera_s.precio == 6750
+    assert pulsera.precio == 75
 
-# def test_act_precio_de_productos_que_tengan_stock():
-#     localfisico.reiniciar_listas()
-#     registrar_cinco_productos_v3()
-#     recargar_stock_a_tres_productos()
-#     localfisico.actualizar_precio_segun(PorStock(),50)
-#     assert remera_m_v3.stock == 100
-#     assert remera_m_v3.precio == 6750
-#     assert pulsera_v3.precio == 75
-#     assert remera_s_v3.precio == 6750
+def test_act_precio_de_productos_que_tengan_stock():
+    localfisico.reiniciar_listas()
+    reiniciar_precio_y_stocks_de_poductos()
+    registrar_cinco_productos()
+    recargar_stock_a_tres_productos()
+    localfisico.actualizar_precio_segun(PorStock(),50)
+    assert remera_m.stock == 100
+    assert remera_m.precio == 6750
+    assert pulsera.precio == 75
+    assert remera_s.precio == 6750
 
 def test_act_precio_por_opcion_de_criterio_stock_en_un_50_porciento():
     localfisico.reiniciar_listas()
     registrar_cinco_productos()
     recargar_stock_a_tres_productos()
     localfisico.actualizar_precio_segun(PorOposicion(PorStock()),50)
-    #assert campera_l.precio == 52500
+    assert campera_l.precio == 52500
     assert pantalon_m.precio == 9000
 
 

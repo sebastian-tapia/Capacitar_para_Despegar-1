@@ -21,7 +21,7 @@ class PorPrecio:
         self.valor = valor
 
     def aplica_a(self, producto):
-        return self.valor > producto.precio
+        return  producto.precio < self.valor
 
 
 class PorStock:
