@@ -1,0 +1,32 @@
+nav {
+    font-size: 2rem;
+    font-family: Arial;
+    margin-left: 2%;
+  
+  }
+
+header{
+  height: 10vh;
+}
+
+body {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(90deg,#fff,#7992de);
+  }
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* fontawesome */
