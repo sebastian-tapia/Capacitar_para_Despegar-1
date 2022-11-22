@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<h2>Productos</h2> <br>
+<div class="productos">
+    {% for prod in p %}
+        {% if prod.stock != 0 %}
+            <div class="productos-con-stock">
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+
+            </div>
+        {% else %}
+            <div class="productos-sin-stock">
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+            </div>
+        {% endif%}
+        
+    {% endfor %}
+</div>
+
+
+{% endblock %}

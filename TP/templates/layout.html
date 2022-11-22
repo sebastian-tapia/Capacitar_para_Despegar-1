@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Macowins</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <section class="container">
+                <section class="logo">
+                    <h2>Macowins</h2>
+                </section>
+
+
+                <section class="links">
+                    <ul>
+                        <li class="link"><a href="{{ url_for('raiz') }}" target="_blank">Home</a></li>
+                        <li class="link"><a href="{{ url_for('listado_productos') }}">Lista de productos</a></li>
+                        <li class="link"><a href="{{ url_for('detalle') }}" target="_blank">Detalle de Productos</a></li>
+                        <!-- <li class="link">
+                            <input class="icon-placeholder" type="text" placeholder="     Buscar producto...">
+                        </li> -->
+                        <li class="link"><a href="{{ url_for('ventas') }}">Listado de ventas</a></li>
+                    </ul>
+                </section>
+            </section>
+            </nav>
+    </header>
+    
+    <main>
+        
+    {% block main %}
+
+    {% endblock %}
+
+    </main>
+    
+    <footer>
+        <p>Copyright</p>
+        <p>Macowins</p>
+    </footer>
+</body>
+<script>
+    
+</script>
+</html>

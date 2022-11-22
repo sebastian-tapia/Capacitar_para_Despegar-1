@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+nav {
+    position: relative;
+    background-color: rgb(29, 108, 186);
+    height: 12vh;
+}
+
+main {
+    height: 76vh;
+}
+
+.container {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    line-height: 80px;
+}
+
+.links .link{
+    display: inline-block;
+}
+
+.links .link a {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 25px;
+    color: aliceblue;
+}
+
+.links .link a:hover {
+    color: #393543;
+}
+
+
+
+/* Home */
+
+
+.home-h2 {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.input{
+    display: flex;
+    margin: 10px auto;
+    width: 10%;
+    border-radius: 0.3rem;
+    border: 1px solid #d3d6e4;
+    height: 22px;
+}
+
+
+input::placeholder {
+    /* background-image: "{{ url_for('img', filename='lupita.svg')}}"; */
+    /* background-image: url(../img/lupita.svg); */
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+
+
+/* Listado de productos */
+
+.productos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.productos-con-stock {
+    color: rgb(8, 16, 8);
+}
+
+.productos-sin-stock {
+    color: rgb(174, 165, 165)
+}
+
+footer {
+    position: relative;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(29, 108, 186);
+}
