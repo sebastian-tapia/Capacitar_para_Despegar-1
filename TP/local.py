@@ -12,8 +12,19 @@ class Local:
         self.ventas=[]
         self.codigos=[]
         self.reporte = ["Fecha", "Cantidad de Ventas", "Valor Ventas del día"]
-        
 
+        
+    def ver_productos(self):
+        productos_2 = []
+        for producto in self.productos:
+            productos_2.append({"codigo": producto.codigo,
+                "nombre": producto.nombre,
+                "categorias": producto.categorias,
+                "precio": producto.precio,
+                "stock": producto.stock
+            })
+        return productos_2
+        
 
     def reiniciar_listas(self):
         self.productos.clear()
@@ -174,6 +185,8 @@ class Virtual(Local):
 local=Local()
 localvirtual = Virtual(10000)
 localfisico = Fisico(75000)
+local_retiro = Fisico(75000)
+local_monserrat = Fisico(75000)
 
 remera_m = Prenda(100,"remera talle m", "remera", 4500)
 pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
@@ -218,13 +231,13 @@ nueva = Nueva()
 
 
 
-localfisico.registrar_producto(remera_m)
-localfisico.registrar_producto(pulsera)
-localfisico.registrar_producto(remera_s)
-localfisico.registrar_producto(campera_l)
-localfisico.registrar_producto(pantalon_m)
-localfisico.registrar_producto(buzo_m)
-localfisico.recargar_stock(100,100)
-localfisico.recargar_stock(1098,100)
+local_retiro.registrar_producto(remera_m)
+local_retiro.registrar_producto(pulsera)
+local_retiro.registrar_producto(remera_s)
+local_retiro.registrar_producto(campera_l)
+local_retiro.registrar_producto(pantalon_m)
+local_retiro.registrar_producto(buzo_m)
+local_retiro.recargar_stock(100,100)
+local_retiro.recargar_stock(1098,100)
 
 

@@ -2,6 +2,31 @@
 
 {% block main %}
 
-<h2>Acá deben mostrarse los productos con todas sus categorías</h2>
+<h2>Detalle de productos</h2> <br>
+
+{% for prod in p %}
+
+<div class="productos">
+        {% if prod.stock != 0 %}
+            <div class="productos-con-stock">
+                <span>Código: </span>{{ prod.codigo }} <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+                <span>Stock: </span>{{ prod.stock }}
+
+            </div>
+        {% else %}
+            <div class="productos-sin-stock">
+                <span>Código: </span>{{ prod.codigo }} <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+                <span>Stock: </span>{{ prod.stock }}
+            </div>
+        {% endif%}
+        
+    {% endfor %}
+</div>
 
 {% endblock %}

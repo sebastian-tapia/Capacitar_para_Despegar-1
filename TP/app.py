@@ -12,12 +12,13 @@ def raiz():
 
 @app.get("/listadodeproductos")
 def listado_productos():
-    p = localfisico.ver_productos()
+    p = local_retiro.ver_productos()
     return render_template("listadodeproductos.html", p=p)    
 
 @app.get("/detalledeproducto")
 def detalle():
-    return render_template("detalledeproducto.html")
+    p = local_retiro.ver_productos()
+    return render_template("detalledeproducto.html", p=p)
 
 
 @app.get("/listadodeventas")
