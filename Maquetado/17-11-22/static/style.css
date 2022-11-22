@@ -5,20 +5,20 @@ nav {
   
   }
 
-header{
+header {
   height: 10vh;
 }
 
 body {
-    height: 80vh;
     display: flex;
     flex-direction: column;
     background: linear-gradient(90deg,#fff,#7992de);
   }
 
-
-.main{
+main {
+    height: 80vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

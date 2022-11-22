@@ -1,33 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-    <title>Página con flask</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="{{ url_for('raiz') }}">Barra de navegacion</a>
-        </nav>
-    </header>
-    <main>
-        <h1 class="main">Saludame!</h1>
-        <form action=""class="main">
-            <input type="text">
-            <a href="saludo.html"><input type=image src="img/manita.png" width="25" height="15"></a>
-        </form>
+{% extends "layout.html" %}
 
-        <h2 class="main"><a href="/recientes" target="_blank">Saludos recientes</a></h2>
-    </main>
-    <footer class="footer">
-        <p>Copyright</p>
-        <p>Sobre HNF</p>
-    </footer>
-</body>
-<script>
-    
-</script>
-</html>
+{% block body %}
+
+    <h1>Saludame!</h1>
+
+    <form action="{{ url_for('saludo') }}">
+        <input type="text" name="nombre" placeholder="Ingrese su nombre...">
+        <button>Enviar saludin</button>
+    </form>
+
+    <h2><a href="/recientes" target="_blank">Saludos recientes</a></h2>
+
+{% endblock %}
