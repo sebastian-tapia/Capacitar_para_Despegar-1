@@ -42,29 +42,37 @@ main {
 /* Home */
 
 
-.home-h2 {
+.home-h2, .producto-encontrado {
     display: flex;
     justify-content: center;
     margin: 15px;
 }
 
-.input{
+.input{ 
     display: flex;
     margin: 10px auto;
-    width: 10%;
+    width: 30%;
     border-radius: 0.3rem;
     border: 1px solid #d3d6e4;
     height: 22px;
+    text-align: center;
+}
+
+.submit {
+    display: flex;
+    margin: auto;
+    width: 8%;
 }
 
 
-input::placeholder {
-    /* background-image: "{{ url_for('img', filename='lupita.svg')}}"; */
-    /* background-image: url(../img/lupita.svg); */
+
+/* input::placeholder {
+    background-image: "{{ url_for('img', filename='lupita.svg')}}";
+    background-image: url(../img/lupita.svg);
     background-size: 16px;
     background-repeat: no-repeat;
     background-position: left center;
-}
+} */
 
 
 

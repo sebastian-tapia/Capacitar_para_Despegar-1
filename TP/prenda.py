@@ -41,13 +41,14 @@ class Prenda:
     def es_de_nombre(self,name):
         return self.nombre==name
     
+    def es_de_precio(self,valor):
+        return self.precio <= valor
     # def es_precio_menor_a(self,precio):
     #     return self.precio < precio
 
     def actualizar_precio(self,valor):
         self.precio += self.precio * valor / 100
         
-
 
     def cambiar_estado(self,estado_nuevo):
         self.estado = estado_nuevo

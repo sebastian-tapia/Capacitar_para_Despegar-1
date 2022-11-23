@@ -1,16 +1,19 @@
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, redirect
 from local import *
 from prenda import *
 
 app = Flask(__name__)
 
 
-@app.get("/")
-def raiz():
-    return render_template("home.html")
-    
 
-@app.get("/listadodeproductos")
+@app.route("/", methods=['GET','POST','DELETE'])
+def raiz():
+    busqueda = request.form.get('busqueda')
+    # busqueda2=local_retiro.buscar(busqueda)
+    return render_template("home.html", busqueda=busqueda)
+
+
+@app.get("/listadodeproductos")   
 def listado_productos():
     p = local_retiro.ver_productos()
     return render_template("listadodeproductos.html", p=p)    
@@ -23,5 +26,4 @@ def detalle():
 
 @app.get("/listadodeventas")
 def ventas():
-    nombre = request.form.get("nombre")
     return render_template("listadodeventas.html")

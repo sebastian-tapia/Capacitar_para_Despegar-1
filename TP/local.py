@@ -24,7 +24,7 @@ class Local:
                 "stock": producto.stock
             })
         return productos_2
-        
+
 
     def reiniciar_listas(self):
         self.productos.clear()
@@ -150,7 +150,31 @@ class Local:
         with open("reporte.csv", "w", newline="") as file:
             writer = csv.writer(file, delimiter=",")
             writer.writerows(self.reporte)
+    
+    def buscar(self,busqueda):
+        prod_encontrados = []
+        for producto in self.productos:
+            if producto.es_de_nombre(busqueda):
+                producto.append({"codigo": producto.codigo,
+                "nombre": producto.nombre,
+                "categorias": producto.categorias,
+                "precio": producto.precio,
+                "stock": producto.stock})
+            elif producto.es_de_categoria(busqueda):
+                p.append({"codigo": producto.codigo,
+                "nombre": producto.nombre,
+                "categorias": producto.categorias,
+                "precio": producto.precio,
+                "stock": producto.stock})
+            elif producto.es_de_precio(busqueda):
+                    p.append({"codigo": producto.codigo,
+                    "nombre": producto.nombre,
+                    "categorias": producto.categorias,
+                    "precio": producto.precio,
+                    "stock": producto.stock})
+        return prod_encontrados
 
+            
 
 class Fisico(Local):
     def __init__(self,gasto_fijo):

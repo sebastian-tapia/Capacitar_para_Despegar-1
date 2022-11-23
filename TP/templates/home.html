@@ -2,13 +2,21 @@
 
 {% block main %}
 <section class="bloque">
-<h2 class="home-h2">Que producto estas buscando?</h2>
-<form class="home-form" action="">
-    <input class="input" type="text" name="por-nombre" placeholder="Por Nombre...">
-    <input class="input" type="text" name="por-categoria" placeholder="Por Categoría...">
-    <input class="input" type="text" name="por-precio" placeholder="Por Precio...">
-</form>
+
+    <h2 class="home-h2">Que producto estas buscando?</h2>
+    
+    <form class="home-form" action="{{ url_for('raiz') }}" method="post" >
+        <!-- <label for="busqueda"></label> -->
+        <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría, precio...">
+        <input class="submit" type="submit" value="Buscar">
+    </form>
 </section>
 
+<section class="producto-encontrado">
+    <div>
+        {{ busqueda }}
+    </div>
+
+</section>
 
 {% endblock %}
