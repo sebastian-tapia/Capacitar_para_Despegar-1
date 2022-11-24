@@ -211,6 +211,7 @@ localvirtual = Virtual(10000)
 localfisico = Fisico(75000)
 local_retiro = Fisico(75000)
 local_monserrat = Fisico(75000)
+local_florida = Fisico(75000)
 
 remera_m = Prenda(100,"remera talle m", "remera", 4500)
 pulsera = Prenda(1098,"pulserita de tela verde", "accesorios", 50)
