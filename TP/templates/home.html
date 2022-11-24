@@ -5,18 +5,11 @@
 
     <h2 class="home-h2">Que producto estas buscando?</h2>
     
-    <form class="home-form" action="{{ url_for('raiz') }}" method="post" >
+    <form class="home-form" action="{{ url_for('resultado') }}" method="post" >
         <!-- <label for="busqueda"></label> -->
         <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría, precio...">
         <input class="submit" type="submit" value="Buscar">
     </form>
-</section>
-
-<section class="producto-encontrado">
-    <div>
-        {{ busqueda3 }}
-    </div>
-
 </section>
 
 {% endblock %}
