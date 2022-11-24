@@ -17,12 +17,7 @@ class Local:
     def ver_productos(self):
         productos_2 = []
         for producto in self.productos:
-            productos_2.append({"codigo": producto.codigo,
-                "nombre": producto.nombre,
-                "categorias": producto.categorias,
-                "precio": producto.precio,
-                "stock": producto.stock
-            })
+            productos_2.append( producto.detalle())
         return productos_2
 
 
@@ -154,25 +149,16 @@ class Local:
     def buscar(self,busqueda):
         prod_encontrados = []
         for producto in self.productos:
-            if producto.es_de_nombre(busqueda):
-                producto.append({"codigo": producto.codigo,
-                "nombre": producto.nombre,
-                "categorias": producto.categorias,
-                "precio": producto.precio,
-                "stock": producto.stock})
-            elif producto.es_de_categoria(busqueda):
-                p.append({"codigo": producto.codigo,
-                "nombre": producto.nombre,
-                "categorias": producto.categorias,
-                "precio": producto.precio,
-                "stock": producto.stock})
-            elif producto.es_de_precio(busqueda):
-                    p.append({"codigo": producto.codigo,
-                    "nombre": producto.nombre,
-                    "categorias": producto.categorias,
-                    "precio": producto.precio,
-                    "stock": producto.stock})
-        return prod_encontrados
+            if type(busqueda) == int:
+                if producto.es_de_precio(busqueda):
+                        prod_encontrados.append(producto.detalle())    
+            else:
+                if producto.es_de_nombre(busqueda):
+                    prod_encontrados.append(producto.detalle())
+                elif producto.es_de_categoria(busqueda):
+                    prod_encontrados.append(producto.detalle())
+        return prod_encontrados        
+                
 
             
 

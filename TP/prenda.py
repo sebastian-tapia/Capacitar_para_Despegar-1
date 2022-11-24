@@ -22,7 +22,16 @@ class Prenda:
         return str(self.categorias)
     def stock_(self):
         return int(self.stock)
-        
+
+    def detalle(self):
+        return {"codigo": self.codigo,
+        "nombre": self.nombre,
+        "precio": self.precio,
+        "categorias": self.categorias,
+        "stock": self.stock
+        } 
+         
+
     def recarga_stock(self,stock):
         self.stock+=stock
 
