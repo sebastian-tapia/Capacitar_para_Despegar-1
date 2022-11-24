@@ -9,9 +9,11 @@ app = Flask(__name__)
 @app.route("/", methods=['GET','POST','DELETE'])
 def raiz():
     busqueda = request.form.get('busqueda')
-    # busqueda2=local_retiro.buscar(busqueda)
-    return render_template("home.html", busqueda=busqueda)
+    # busqueda2 = local_retiro.buscar(busqueda)
+    return render_template("home.html", busqueda3=ingre())
 
+def ingre():
+    return request.args.get("busqueda")
 
 @app.get("/listadodeproductos")   
 def listado_productos():
@@ -27,3 +29,4 @@ def detalle():
 @app.get("/listadodeventas")
 def ventas():
     return render_template("listadodeventas.html")
+
