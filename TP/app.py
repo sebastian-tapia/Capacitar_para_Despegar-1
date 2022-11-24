@@ -6,14 +6,15 @@ app = Flask(__name__)
 
 
 
-@app.route("/", methods=['GET','POST','DELETE'])
+@app.route("/")
 def raiz():
-    busqueda = request.form.get('busqueda')
-    # busqueda2 = local_retiro.buscar(busqueda)
-    return render_template("home.html", busqueda3=busqueda)
+    return render_template("home.html")
 
-def ingre():
-    return request.args.get("busqueda")
+@app.route("/resultado", methods=['GET','POST','DELETE'])
+def resultado():
+    busqueda = request.form.get('busqueda')
+    r = local_retiro.buscar(busqueda)
+    return render_template("resultado.html", r=r)
 
 @app.get("/listadodeproductos")   
 def listado_productos():
