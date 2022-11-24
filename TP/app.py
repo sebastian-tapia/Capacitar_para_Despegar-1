@@ -10,7 +10,7 @@ app = Flask(__name__)
 def raiz():
     busqueda = request.form.get('busqueda')
     # busqueda2 = local_retiro.buscar(busqueda)
-    return render_template("home.html", busqueda3=ingre())
+    return render_template("home.html", busqueda3=busqueda)
 
 def ingre():
     return request.args.get("busqueda")
