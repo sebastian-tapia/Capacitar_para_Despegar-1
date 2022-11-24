@@ -117,7 +117,7 @@ buzo_m_v5 = Prenda(333,"buzo talle m", "buzo", 5500)
 
 
 
-
+promo_100 = Promocion(100)
 promo_500 = Promocion(500)
 promo_300=Promocion(300)
 liquidacion=Liquidacion()
