@@ -85,10 +85,14 @@ main {
 }
 .productos-con-stock {
     color: rgb(8, 16, 8);
+    margin: 10px;
+    display: inline-block;
 }
 
 .productos-sin-stock {
-    color: rgb(174, 165, 165)
+    margin: 10px;
+    color: rgb(174, 165, 165);
+    display: inline-block;
 }
 
 footer {
