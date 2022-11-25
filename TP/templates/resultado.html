@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<section class="bloque">
+
+    <h2 class="home-h2">Que producto estas buscando?</h2>
+    
+    <form class="home-form" action="{{ url_for('resultado') }}" method="post" >
+        <!-- <label for="busqueda"></label> -->
+        <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría, precio...">
+        <input class="submit" type="submit" value="Buscar">
+    </form>
+</section>
+
+{% for prod in r %}
+<a href="{{ url_for('listado_productos') }}">
+<div class="productos-con-stock">
+    <span>Nombre: </span>{{ prod.nombre }} <br>
+    <span>Categorías: </span>{{ prod.categorias }} <br>
+    <span>Precio: $</span>{{ prod.precio }} <br>
+    <span>Stock: </span>{{ prod.stock }} <br>
+</div>
+</a>
+    {% endfor %}
+
+
+{% endblock %}
