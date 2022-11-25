@@ -83,16 +83,18 @@ main {
     flex-direction: row;
     justify-content: space-around;
 }
-.productos-con-stock {
+.productos-con-stock, .productos-sin-stock {
     color: rgb(8, 16, 8);
     margin: 10px;
     display: inline-block;
+    border-style: outset;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 7px;
 }
 
 .productos-sin-stock {
-    margin: 10px;
-    color: rgb(174, 165, 165);
-    display: inline-block;
+    color: rgb(174, 165, 165);    
 }
 
 footer {
@@ -104,3 +106,32 @@ footer {
     align-items: center;
     background-color: rgb(29, 108, 186);
 }
+
+.ventas {
+    border-style: outset;
+    border-width: 5px;
+    border-color: white;
+}
+
+.comienzo {
+    display: inline-block;
+    justify-items: center;
+}
+
+th, td{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+    background-color: #dddddd;
+}
+
+.tabla{
+    border-collapse: collapse;
+    margin-top: 22px;
+}
+
+/* #FFFFFF
+    #DFEBD3 */

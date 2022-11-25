@@ -1,0 +1,7 @@
+-ver paleta de colores.
+-distinguir bien productos sin stock(mejorar contraste)
+-redireccionar al detalle del producuto
+-quitar de nav detalle de producto
+-home repensar los tipos de busqueda (agregar dos input)
+-agregar responsive
+-agregar linkeo a macowins

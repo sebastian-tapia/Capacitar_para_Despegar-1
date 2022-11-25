@@ -6,6 +6,7 @@
     {% for prod in p %}
         {% if prod.stock != 0 %}
             <div class="productos-con-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt=""> <br>
                 <span>Nombre: </span>{{ prod.nombre }} <br>
                 <span>Categorías: </span>{{ prod.categorias }} <br>
                 <span>Precio: $</span>{{ prod.precio }} <br>

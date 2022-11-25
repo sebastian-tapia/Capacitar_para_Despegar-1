@@ -16,6 +16,9 @@ def resultado():
     r = local_retiro.buscar(busqueda)
     return render_template("resultado.html", r=r)
 
+
+
+
 @app.get("/listadodeproductos")   
 def listado_productos():
     p = local_retiro.ver_productos()
@@ -29,5 +32,6 @@ def detalle():
 
 @app.get("/listadodeventas")
 def ventas():
+    # lista_de_ventas = local_retiro.ventas()
     return render_template("listadodeventas.html")
 

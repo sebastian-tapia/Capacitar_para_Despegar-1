@@ -250,5 +250,9 @@ local_retiro.registrar_producto(pantalon_m)
 local_retiro.registrar_producto(buzo_m)
 local_retiro.recargar_stock(100,100)
 local_retiro.recargar_stock(1098,100)
+local_retiro.recargar_stock(99,100)
+local_retiro.realizar_compra(100,50)
+local_retiro.realizar_compra(1098,10)
+local_retiro.realizar_compra(99,10)
 
 

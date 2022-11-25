@@ -2,6 +2,52 @@
 
 {% block main %}
 
-<h2>Acá deben mostrarse la lista de ventas</h2>
+<h2>Ventas</h2>
 
+<label class="fitro-fecha" for="start">Buscar por fecha:</label>
+
+<input type="date" class="comienzo" name="trip-start" value="2000-01-01" min="2018-01-01" max="2022-12-31">
+
+<span>a</span>
+
+<input type="date" class="final" name="trip-start"value="2000-01-01"min="2018-01-01" max="2022-12-31"> <br>
+<input type="submit" name="Buscar">
+
+
+
+<table class="tabla" style="width: 100%;">
+    <tr>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Sucursal</th>
+        <th>Fecha</th>
+    </tr>
+
+    <tr class="data">
+        <td>Remera M</td>
+        <td>5</td>
+        <td>4500</td>
+        <td>Retiro</td>
+        <td>2022-08-14</td>
+    </tr>
+
+    <tr>
+        <td>Buzo L</td>
+        <td>3</td>
+        <td>7500</td>
+        <td>Monserrat</td>
+        <td>2022-08-14</td>
+    </tr>
+
+
+</table>
+
+
+       
+
+
+
+
+       
 {% endblock %}
