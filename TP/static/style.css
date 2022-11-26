@@ -91,6 +91,7 @@ main {
     border-width: 5px;
     border-color: white;
     border-radius: 7px;
+
 }
 
 .productos-sin-stock {
@@ -131,6 +132,13 @@ tr:nth-child(even){
 .tabla{
     border-collapse: collapse;
     margin-top: 22px;
+}
+
+.sin-stock {
+    background-color: red;
+    border: 1px solid #000 inherit;
+    border-radius: 3px;
+    width: 40%;
 }
 
 /* #FFFFFF
