@@ -14,7 +14,7 @@
 </section>
 
 {% for prod in r %}
-<a href="{{ url_for('listado_productos') }}">
+<a href="{{ url_for('detalle') }}">
 <div class="productos-con-stock">
     <span>Nombre: </span>{{ prod.nombre }} <br>
     <span>Categorías: </span>{{ prod.categorias }} <br>
