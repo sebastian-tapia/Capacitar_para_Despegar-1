@@ -8,14 +8,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def raiz():
-    return render_template("home.html")
+    p = local_retiro.ver_productos()
+    return render_template("home.html", p=p)
 
 @app.route("/resultado", methods=['GET','POST','DELETE'])
 def resultado():
     busqueda = request.form.get('busqueda')
     r = local_retiro.buscar(busqueda)
-    return render_template("resultado.html", r=r)
-
+    return render_template("resultado.html", r=r, busqueda=busqueda)
 
 
 
@@ -24,10 +24,10 @@ def listado_productos():
     p = local_retiro.ver_productos()
     return render_template("listadodeproductos.html", p=p)    
 
-@app.get("/detalledeproducto")
+@app.route("/detalledeproducto", methods=['GET','POST','DELETE'])
 def detalle():
-    p = local_retiro.ver_productos()
-    return render_template("detalledeproducto.html", p=p)
+    producto = local_retiro.ver_productos()
+    return render_template("detalledeproducto.html", producto=producto)
 
 
 @app.get("/listadodeventas")

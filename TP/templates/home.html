@@ -7,9 +7,33 @@
     
     <form class="home-form" action="{{ url_for('resultado') }}" method="post" >
         <!-- <label for="busqueda"></label> -->
-        <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría, precio...">
+        <input class="input" type="text" name="busqueda" placeholder="Por nombre...">
         <input class="submit" type="submit" value="Buscar">
     </form>
 </section>
+
+<h3>Productos</h3> <br>
+<div class="productos">
+    {% for prod in p %}
+        {% if prod.stock != 0 %}
+            <div class="productos-con-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+
+            </div>
+        {% else %}
+            <div class="productos-sin-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <span>Categorías: </span>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+                <div class="sin-stock">sin-stock</div>
+            </div>
+        {% endif%}
+        
+    {% endfor %}
+</div>
 
 {% endblock %}

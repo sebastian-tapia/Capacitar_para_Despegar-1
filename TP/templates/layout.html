@@ -10,26 +10,22 @@
 </head>
 <body>
     <header>
-        <nav>
-            <section class="container">
-                <section class="logo">
-                    <h2>Macowins</h2>
-                </section>
-
-
-                <section class="links">
-                    <ul>
-                        <li class="link"><a href="{{ url_for('raiz') }}">Home</a></li>
-                        <li class="link"><a href="{{ url_for('listado_productos') }}">Lista de productos</a></li>
-                        <li class="link"><a href="{{ url_for('detalle') }}">Detalle de Productos</a></li>
-                        <!-- <li class="link">
-                            <input class="icon-placeholder" type="text" placeholder="     Buscar producto...">
-                        </li> -->
-                        <li class="link"><a href="{{ url_for('ventas') }}">Listado de ventas</a></li>
-                    </ul>
-                </section>
-            </section>
-            </nav>
+        <nav class="container">
+            <ul class="links">
+                <li class="link"><a href="{{ url_for('raiz') }}">Macowins</a></li></li>
+                <li class="link"><a href="{{ url_for('raiz') }}">Home</a></li>
+                <li class="link"><a href="{{ url_for('listado_productos') }}">Lista de productos</a></li>
+                <li class="link" id="input">
+                    <form action="{{ url_for('resultado') }}" method="post">
+                        <input class="input-nav" type="text" name="busqueda" placeholder="Nombre / Categoría"></li>
+                    </form>    
+                    <!-- <li class="link"><a href="{{ url_for('detalle') }}">Detalle de Productos</a></li> -->
+                <!-- <li class="link">
+                    <input class="icon-placeholder" type="text" placeholder="     Buscar producto...">
+                </li> -->
+                <!-- <li class="link"><a href="{{ url_for('ventas') }}">Listado de ventas</a></li> -->
+            </ul>
+        </nav>
     </header>
     
     <main>
