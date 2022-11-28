@@ -6,7 +6,7 @@
 
     <h2 class="home-h2">Que producto estas buscando?</h2>
     
-    <form class="home-form" action="{{ url_for('resultado') }}" method="post" >
+    <form class="home-form" action="{{ url_for('resultado') }}" method="get" >
         <!-- <label for="busqueda"></label> -->
         <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría...">
         <input class="submit" type="submit" value="Buscar">
@@ -18,7 +18,7 @@
 
 {% for prod in r %}
 
-<a href="{{ url_for('detalle') }}">
+<a href="{{ url_for('detalle', id=prod.codigo) }}">
 <div class="productos-con-stock">
     <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
     <span>Nombre: </span>{{ prod.nombre }} <br>

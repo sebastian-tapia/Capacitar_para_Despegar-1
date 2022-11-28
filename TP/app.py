@@ -11,9 +11,10 @@ def raiz():
     p = local_retiro.ver_productos()
     return render_template("home.html", p=p)
 
-@app.route("/resultado", methods=['GET','POST','DELETE'])
+@app.get("/resultado")
 def resultado():
-    busqueda = request.form.get('busqueda')
+    busqueda = request.args['busqueda']
+    # convertir los datos de arriba a string
     r = local_retiro.buscar(busqueda)
     return render_template("resultado.html", r=r, busqueda=busqueda)
 
@@ -24,14 +25,19 @@ def listado_productos():
     p = local_retiro.ver_productos()
     return render_template("listadodeproductos.html", p=p)    
 
-@app.route("/detalledeproducto", methods=['GET','POST','DELETE'])
-def detalle():
+@app.get("/productos/<int:id>")
+def detalle(id):
+    print("Estamos buscando el producto", id)
     producto = local_retiro.ver_productos()
     return render_template("detalledeproducto.html", producto=producto)
 
 
 @app.get("/listadodeventas")
 def ventas():
-    # lista_de_ventas = local_retiro.ventas()
-    return render_template("listadodeventas.html")
+    ventas = local_retiro.ventas
+    return render_template("listadodeventas.html", ventas=ventas)
 
+@app.get("/filtro")
+def filtro():
+    ventas = local_retiro.ventas
+    return render_template("filtro.html", ventas=ventas)

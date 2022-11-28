@@ -1,0 +1,15 @@
+REST
+    listado de productos: 
+        GET /productos
+
+    listado de sucursales: 
+        GET /sucursales
+
+    etc
+
+    detalle de productos: 
+        GET /productos/78
+
+    detalle de sucursales: 
+        GET /sucursales/retiro
+

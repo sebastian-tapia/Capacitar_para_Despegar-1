@@ -4,50 +4,32 @@
 
 <h2 class="home-h2">Ventas</h2>
 <section class="filtro-section">
-<label class="fitro-fecha" for="start">Buscar por fecha:</label>
-
-<input type="date" class="filtro" name="trip-start" value="2022-01-01" min="2023-12-01" max="2022-12-31">
-
+<label action="{{ url_for('filtro') }}" class="fitro-fecha" for="start">Buscar por fecha:</label>
+<input type="date" class="filtro" min="2022-01-01" max="2022-12-31">
 <span>a</span>
-
-<input type="date" class="filtro" name="trip-start"value="2022-12-01"min="2023-12-01" max="2022-12-31"> <br>
+<input type="date" class="filtro" min="2022-01-01" max="2022-12-31">
 <input type="submit" name="Buscar" value="Filtrar">
 </section>
 
 
-<table class="tabla" style="width: 100%;">
-    <tr>
-        <th>Nombre</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>Sucursal</th>
-        <th>Fecha</th>
-    </tr>
+{% for venta in ventas %}
+    <table class="tabla" style="width: 100%;">
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Sucursal</th>
+            <th>Fecha</th>
+        </tr>
 
-    <tr>
-        <td>Remera M</td>
-        <td>5</td>
-        <td>4500</td>
-        <td>Retiro</td>
-        <td>2022-08-14</td>
-    </tr>
-
-    <tr>
-        <td>Buzo L</td>
-        <td>3</td>
-        <td>7500</td>
-        <td>Monserrat</td>
-        <td>2022-08-14</td>
-    </tr>
-
-    <tr>
-        <td>Puserita</td>
-        <td>2</td>
-        <td>50</td>
-        <td>Monserrat</td>
-        <td>2022-08-14</td>
-    </tr>
-
-</table>
+        <tr>
+            <td>venta[cantidad]</td>
+            <td>venta.cantidad</td>
+            <td>venta.precio</td>
+            <td>Retiro</td>
+            <td>venta.fecha</td>
+        </tr>
+    </table>
+{% endfor %}
        
 {% endblock %}
