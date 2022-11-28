@@ -12,24 +12,24 @@
 </section>
 
 
-{% for venta in ventas %}
-    <table class="tabla" style="width: 100%;">
-        <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Sucursal</th>
-            <th>Fecha</th>
-        </tr>
+<table class="tabla" style="width: 100%;">
+    <tr>
+        <th>Codigo de Producto</th>
+        <th>Cantidad Vendidos</th>
+        <th>Precio Total</th>
+        <th>Sucursal</th>
+        <th>Fecha</th>
+    </tr>
 
+{% for venta in vendidos %}
         <tr>
-            <td>venta[cantidad]</td>
-            <td>venta.cantidad</td>
-            <td>venta.precio</td>
+            <td>{{ venta.codigo_producto }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td>{{ venta.precio_total }}</td>
             <td>Retiro</td>
-            <td>venta.fecha</td>
+            <td>{{ venta.fecha }}</td>
         </tr>
-    </table>
+    
 {% endfor %}
-       
+</table>       
 {% endblock %}

@@ -2,6 +2,7 @@ import csv
 from prenda import *
 from criterios import *
 from datetime import date
+from persistencia import *
 hoy = date.strftime(date.today(), "%Y-%m-%d")
 from operator import itemgetter
 
@@ -9,7 +10,18 @@ from operator import itemgetter
 class Local:
     def __init__(self):
         self.productos=[]
-        self.ventas=[]
+        self.ventas=[{
+                    "codigo_producto": 100,
+                    "cantidad": 10,
+                    "fecha": "2022-11-22",
+                    "precio_total": 45000
+                    },
+                    {
+                    "codigo_producto": 99,
+                    "cantidad": 10,
+                    "fecha": "2022-11-22",
+                    "precio_total": 45000
+                    }]
         self.codigos=[]
         self.reporte = ["Fecha", "Cantidad de Ventas", "Valor Ventas del día"]
 

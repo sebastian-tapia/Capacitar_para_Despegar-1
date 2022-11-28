@@ -34,10 +34,11 @@ def detalle(id):
 
 @app.get("/listadodeventas")
 def ventas():
-    ventas = local_retiro.ventas
-    return render_template("listadodeventas.html", ventas=ventas)
+    vendidos = local_retiro.ventas
+    return render_template("listadodeventas.html", vendidos=vendidos)
 
 @app.get("/filtro")
 def filtro():
-    ventas = local_retiro.ventas
-    return render_template("filtro.html", ventas=ventas)
+    vendidos = local_retiro.ventas
+    resultado = request.args['resultado']
+    return render_template("filtro.html", vendidos=vendidos, resultado=resultado)
