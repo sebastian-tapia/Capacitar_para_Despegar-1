@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../static/style.css"> -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='title-logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Macowins</title>
 </head>
 <body>
     <header>
         <nav class="container">
+            
+                <a href="{{ url_for('raiz') }}"><img class="logo" src="{{ url_for('static', filename='logo3.png') }}"  alt="logo"></a>
+            
             <ul class="links">
-                <li class="link"><a href="{{ url_for('raiz') }}">Macowins</a></li></li>
+                <!-- <li class="link"><a href="{{ url_for('raiz') }}"><img class="logo" src="{{ url_for('static', filename='logo3.png') }}"  alt="logo"></a></li> -->
                 <li class="link"><a href="{{ url_for('listado_productos') }}">Lista de productos</a></li>
                 <li class="link" id="input">
                     <form action="{{ url_for('resultado') }}" method="get">

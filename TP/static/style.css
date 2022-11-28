@@ -5,53 +5,6 @@
 }
 
 
-/* @media screen and (min-widht: 600px) {
-    .menu_bar {
-        display:none;
-    }
-    
-    header {
-        width: 100%;
-        background-color: #000;
-    }
-    
-    header nav {
-        background:#023859;
-        z-index:1000;
-        max-width: 1000px;
-        width:95%;
-        margin:20px auto;
-    }
-    
-    header nav ul {
-        list-style:none;
-    }
-    
-    header section nav ul li {
-        display:inline-block;
-        position: relative;
-    }
-    
-    header section nav ul li:hover {
-        background:#E6344A;
-    }
-    
-    header section nav ul li a {
-        color:#fff;
-        display:block;
-        text-decoration:none;
-        padding: 20px;
-    }
-} */
-
-/* @media screen and (min-width: 601px) and (max-width: 1200px) {
-
-}
-
-@media screen and (min-width: 1201px) {
-
-} */
-
 footer {
     background-color: rgb(61, 70, 79);
 }
@@ -74,7 +27,7 @@ nav {
     margin: auto;
     display: flex;
     justify-content: space-between;
-    max-width: 1000px;
+    max-width: 70%;
     line-height: 80px;
     border-style: solid;
     border-width: 1px;
@@ -96,6 +49,7 @@ nav {
 
 .links .link{
     display: inline-block;
+    margin-top: 25px;
 }
 
 .links .link a {
@@ -112,12 +66,14 @@ nav {
     color: #b7b3c0;
 }
 
-img {
-    height: 10%;
-}
+
 
 /* Home */
 
+.logo {
+    width: 65%;
+    height: 65%;
+}
 
 .bloque {
     margin: 15px;
@@ -126,6 +82,7 @@ img {
 .home-h2, .producto-encontrado {
     display: flex;
     justify-content: center;
+    margin-top: 35px;
 }
 
 .input{ 
