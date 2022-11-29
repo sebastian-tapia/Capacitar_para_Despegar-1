@@ -4,20 +4,19 @@
 
 <h2>Detalle de productos</h2> <br>
 
-<div class="productos-con-stock">
+<!-- <div class="productos-con-stock">
     <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
     <span>Código: </span>100 <br>
     <span>Nombre: </span>remera talle m <br>
     <span>Categorías: </span>remera, remera de futbol <br>
     <span>Precio: $</span>4500 <br>
     <span>Stock: </span>100
-</div>
+</div> -->
 
 
-<!-- {% for prod in producto %}
+{% for prod in producto %}
 <div class="productos">
-
-        {% if prod.nombre == resultado %}
+        {% if prod.codigo == id %}
             <div class="productos-con-stock">
                 <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
                 <span>Código: </span>{{ prod.codigo }} <br>
@@ -29,6 +28,6 @@
         {% endif %}
         
 </div>
-{% endfor %} -->
+{% endfor %}
 
 {% endblock %}

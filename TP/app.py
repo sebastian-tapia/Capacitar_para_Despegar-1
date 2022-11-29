@@ -29,16 +29,17 @@ def listado_productos():
 def detalle(id):
     print("Estamos buscando el producto", id)
     producto = local_retiro.ver_productos()
-    return render_template("detalledeproducto.html", producto=producto)
+    return render_template("detalle.html", producto=producto, id=id)
 
 
-@app.get("/listadodeventas")
+@app.get("/ventas")
 def ventas():
     vendidos = local_retiro.ventas
-    return render_template("listadodeventas.html", vendidos=vendidos)
+    return render_template("ventas.html", vendidos=vendidos)
 
 @app.get("/filtro")
 def filtro():
     vendidos = local_retiro.ventas
     resultado = request.args['resultado']
-    return render_template("filtro.html", vendidos=vendidos, resultado=resultado)
+    resultado1 = request.args['resultado1']
+    return render_template("filtro.html", vendidos=vendidos, resultado=resultado, resultado1=resultado1)
