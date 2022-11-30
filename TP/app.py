@@ -19,7 +19,6 @@ def resultado():
     return render_template("resultado.html", r=r, busqueda=busqueda)
 
 
-
 @app.get("/listadodeproductos")   
 def listado_productos():
     p = local_retiro.ver_productos()

@@ -13,12 +13,14 @@ footer {
 
 
 main {
-    height: 76vh;   
+    /* height: 80vh; */
+    width: 100%;  
 }
 
 body {
     background-color: white;
 }
+
 nav {
     margin: auto;
     display: flex;
@@ -109,21 +111,25 @@ nav {
 
 
 
+
 /* Listado de productos */
 
 .productos {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: space-between;
-    margin: auto;
+    margin-bottom: 4%;
+    flex-wrap: wrap;
+    padding: 0 20%;
+
 }
 .productos-con-stock, .productos-sin-stock {
     color: rgb(8, 16, 8);
     margin: 10px;
     display: inline-block;
-    border-radius: 0.5px;
-    border-style: solid;
-
+    border-radius: 6px;
+    border: 1px solid;
+    padding-left: 5px;
 }
 
 .productos-sin-stock {
@@ -131,15 +137,18 @@ nav {
 }
 
 footer {
-    /* position: relative; */
+    position: relative;
     height: 11vh;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     color: #dddddd;
-    padding-left: 35px;
-    padding-right: 35px;
+}
+
+.copyright {
+    margin-right: 70%;
 }
 
 .ventas {
@@ -166,6 +175,7 @@ tr:nth-child(even){
 .tabla{
     border-collapse: collapse;
     margin-top: 22px;
+    margin-bottom: auto;
 }
 
 .sin-stock {

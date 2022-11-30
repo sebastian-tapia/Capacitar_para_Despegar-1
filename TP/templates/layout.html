@@ -14,16 +14,11 @@
                 <a href="{{ url_for('raiz') }}"><img class="logo" src="{{ url_for('static', filename='logo3.png') }}"  alt="logo"></a>
             
             <ul class="links">
-                <!-- <li class="link"><a href="{{ url_for('raiz') }}"><img class="logo" src="{{ url_for('static', filename='logo3.png') }}"  alt="logo"></a></li> -->
                 <li class="link"><a href="{{ url_for('listado_productos') }}">Lista de productos</a></li>
                 <li class="link" id="input">
                     <form action="{{ url_for('resultado') }}" method="get">
                         <input class="input-nav" type="text" name="busqueda" placeholder="Nombre / Categoría"></li>
-                    </form>    
-                <!-- <li class="link">
-                    <input class="icon-placeholder" type="text" placeholder="     Buscar producto...">
-                </li> -->
-                <!-- <li class="link"><a href="{{ url_for('ventas') }}">Listado de ventas</a></li> -->
+                    </form>
             </ul>
         </nav>
     </header>
@@ -37,8 +32,8 @@
     </main>
     
     <footer>
-        <p>Copyright</p>
-        <p>Macowins</p>
+        <p class="copyright">Copyright</p>
+        <p class="macowins">Macowins</p>
     </footer>
 </body>
 <script>
