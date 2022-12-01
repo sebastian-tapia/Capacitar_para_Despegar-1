@@ -10,37 +10,47 @@
         <label for="busqueda"></label>
         <input class="input" type="text" name="busqueda" placeholder="Por nombre, categoría...">
         <!-- <input class="submit" type="submit" value="Buscar"> -->
+        
     </form>
+
+    <form class="home-form" action="{{ url_for('precio') }}" method="get" >
+        <label for="precio"></label>
+        <input class="input" type="number" name="precio" placeholder="Por precio...">
+        <!-- <input class="submit" type="submit" value="Buscar"> -->
+    </form>    
 </section>
 
 
-<h3 class="r-h3">Resultados para {{ busqueda }}</h3>
+<h3 class="r-h3">Resultados para {{ busqueda }} {{ precio }}</h3>
 
 
 <section class="productos-home">
     <div class="productos">
-{% for prod in r %}
 
-<a href="{{ url_for('detalle', id=prod.codigo) }}">
-    {% if prod.stock != 0 %}
-    <div class="productos-con-stock">
-        <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
-        <span>Nombre: </span>{{ prod.nombre }} <br>
-        <p>Categorías: </p>{{ prod.categorias }} <br>
-        <span>Precio: $</span>{{ prod.precio }} <br><br><br>
+    
+    {% for prod in r %}
 
-    </div>
-{% else %}
-    <div class="productos-sin-stock">
-        <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
-        <span>Nombre: </span>{{ prod.nombre }} <br>
-        <p>Categorías: </p>{{ prod.categorias }} <br>
-        <span>Precio: $</span>{{ prod.precio }} <br>
-        <div class="sin-stock">sin-stock</div><br>
-    </div>
-{% endif%}
-</a>
-{% endfor %}
+    <a href="{{ url_for('detalle', id=prod.codigo) }}">
+        {% if prod.stock != 0 %}
+            <div class="productos-con-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <p>Categorías: </p>{{ prod.categorias[0] }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br><br><br>
+
+            </div>
+        {% else %}
+            <div class="productos-sin-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <p>Categorías: </p>{{ prod.categorias[0] }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+                <div class="sin-stock">sin-stock</div><br>
+            </div>
+        {% endif%}
+    </a>
+    {% endfor %}
+
 </div>
 </section>
 

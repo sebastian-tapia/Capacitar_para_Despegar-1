@@ -10,6 +10,7 @@
         {% if prod.codigo == id %}
             <div class="productos-con-stock">
                 <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Local: Retiro</span><br>
                 <span>Código: </span>{{ prod.codigo }} <br>
                 <span>Nombre: </span>{{ prod.nombre }} <br>
                 <p>Categorías: </p>{{ prod.categorias }} <br>

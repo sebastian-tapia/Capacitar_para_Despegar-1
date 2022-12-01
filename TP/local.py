@@ -161,17 +161,20 @@ class Local:
     def buscar(self,busqueda):
         prod_encontrados = []
         for producto in self.productos:
-            if type(busqueda) == int:
-                if producto.es_de_precio(busqueda):
-                        prod_encontrados.append(producto.detalle())    
-            else:
                 if producto.es_de_nombre(busqueda):
                     prod_encontrados.append(producto.detalle())
                 elif producto.es_de_categoria(busqueda):
                     prod_encontrados.append(producto.detalle())
         return prod_encontrados        
                 
-
+    
+    def buscar_precio(self,precio):
+        prod_encontrados = []
+        busq = int(precio)
+        for producto in self.productos:
+            if producto.es_de_precio(busq):
+                prod_encontrados.append(producto.detalle())
+        return prod_encontrados
             
 
 class Fisico(Local):
@@ -198,7 +201,15 @@ class Virtual(Local):
         return self.valor_ventas_del_dia() - self.gasto_por_ventas_diarias()
 
 
+def vernombre(clase):
+    l=str((type(clase)._name_))
+    return l
 
+
+def nombre(clase):
+    locals = [name for name in globals() if globals()[name] is clase]
+    list.append(locals,vernombre(clase)) 
+    return locals
 
 
 
@@ -213,7 +224,7 @@ local_florida = Fisico(75000)
 
 remera_m = Prenda(100,"remera talle m", "remera", 4500)
 pulsera = Prenda(1098,"pulserita verde", "accesorios", 50)
-remera_s = Prenda(99,"remera de talle s", "remera", 4500)
+remera_s = Prenda(99,"remera talle s", "remera", 4500)
 campera_l = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m = Prenda(333,"buzo talle m", "buzo", 5500)
@@ -221,28 +232,28 @@ remera_l = Prenda (101,"remera talle l", "remera", 4500)
 
 remera_m_v2 = Prenda(100,"remera talle m", "remera", 4500)
 pulsera_v2 = Prenda(1098,"pulserita verde", "accesorios", 50)
-remera_s_v2 = Prenda(99,"remera de talle s", "remera", 4500)
+remera_s_v2 = Prenda(99,"remera talle s", "remera", 4500)
 campera_l_v2 = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m_v2 = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m_v2 = Prenda(333,"buzo talle m", "buzo", 5500)
 
 remera_m_v3 = Prenda(100,"remera talle m", "remera", 4500)
 pulsera_v3 = Prenda(1098,"pulserita verde", "accesorios", 50)
-remera_s_v3 = Prenda(99,"remera de talle s", "remera", 4500)
+remera_s_v3 = Prenda(99,"remera talle s", "remera", 4500)
 campera_l_v3 = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m_v3 = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m_v3 = Prenda(333,"buzo talle m", "buzo", 5500)
 
 remera_m_v4 = Prenda(100,"remera talle m", "remera", 4500)
 pulsera_v4 = Prenda(1098,"pulserita verde", "accesorios", 50)
-remera_s_v4 = Prenda(99,"remera de talle s", "remera", 4500)
+remera_s_v4 = Prenda(99,"remera talle s", "remera", 4500)
 campera_l_v4 = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m_v4 = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m_v4 = Prenda(333,"buzo talle m", "buzo", 5500)
 
 remera_m_v5 = Prenda(100,"remera talle m", "remera", 4500)
 pulsera_v5 = Prenda(1098,"pulserita verde", "accesorios", 50)
-remera_s_v5 = Prenda(99,"remera de talle s", "remera", 4500)
+remera_s_v5 = Prenda(99,"remera talle s", "remera", 4500)
 campera_l_v5 = Prenda(555,"campera talle l", "campera", 35000)
 pantalon_m_v5 = Prenda(444,"pantalon talle m", "pantalon", 6000)
 buzo_m_v5 = Prenda(333,"buzo talle m", "buzo", 5500)

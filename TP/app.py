@@ -14,20 +14,25 @@ def raiz():
 @app.get("/resultado")
 def resultado():
     busqueda = request.args['busqueda']
-    # convertir los datos de arriba a string
     r = local_retiro.buscar(busqueda)
     return render_template("resultado.html", r=r, busqueda=busqueda)
 
+@app.get("/precio")
+def precio():
+    precio = request.args['precio']
+    r = local_retiro.buscar_precio(precio)
+    return render_template("precio.html", r=r, precio=precio)
 
-@app.get("/listadodeproductos")   
+@app.get("/productos")   
 def listado_productos():
     p = local_retiro.ver_productos()
-    return render_template("listadodeproductos.html", p=p)    
+    return render_template("productos.html", p=p)    
 
 @app.get("/productos/<int:id>")
 def detalle(id):
     print("Estamos buscando el producto", id)
     producto = local_retiro.ver_productos()
+    # nombreLocal=nombre(local_retiro)
     return render_template("detalle.html", producto=producto, id=id)
 
 

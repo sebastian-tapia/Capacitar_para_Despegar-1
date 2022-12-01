@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block main %}
+
 <section class="bloque">
 
     <h2 class="home-h2">Que producto estas buscando?</h2>
@@ -20,32 +21,36 @@
 </section>
 
 
+<h3 class="r-h3">Resultados para precios hasta ${{ precio }}</h3>
 
-<h3>Productos</h3> <br>
+
 <section class="productos-home">
-<div class="productos">
-    {% for prod in p %}
+    <div class="productos">
+
+    
+    {% for prod in r %}
+
     <a href="{{ url_for('detalle', id=prod.codigo) }}">
         {% if prod.stock != 0 %}
             <div class="productos-con-stock">
                 <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
                 <span>Nombre: </span>{{ prod.nombre }} <br>
-                <span>Categorías: </span>{{ prod.categorias[0] }} <br>
-                <span>Precio: $</span>{{ prod.precio }} <br>
+                <p>Categorías: </p>{{ prod.categorias[0] }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br><br><br>
 
             </div>
         {% else %}
             <div class="productos-sin-stock">
                 <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
                 <span>Nombre: </span>{{ prod.nombre }} <br>
-                <span>Categorías: </span>{{ prod.categorias[0] }} <br>
+                <p>Categorías: </p>{{ prod.categorias[0] }} <br>
                 <span>Precio: $</span>{{ prod.precio }} <br>
-                <div class="sin-stock">sin-stock</div>
-
+                <div class="sin-stock">sin-stock</div><br>
             </div>
         {% endif%}
-    </a>    
+    </a>
     {% endfor %}
+
 </div>
 </section>
 
