@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h1>Saludame!</h1>
+
+    <form action="{{ url_for('saludo') }}">
+        <input type="text" name="nombre" placeholder="Ingrese su nombre...">
+        <button>Enviar saludin</button>
+    </form>
+
+    <h2><a href="/recientes" target="_blank">Saludos recientes</a></h2>
+
+{% endblock %}

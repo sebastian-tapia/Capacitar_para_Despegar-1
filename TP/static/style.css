@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+
+footer {
+    background-color: rgb(61, 70, 79);
+}
+
+
+
+
+main {
+    /* height: 80vh; */
+    width: 100%;  
+}
+
+body {
+    background-color: white;
+}
+
+nav {
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%;
+    line-height: 80px;
+    border-style: solid;
+    border-width: 1px;
+    border-top: #fff;
+    border-left: #fff;
+    border-right: #fff;
+}
+
+.input-nav{ 
+    display: flex;
+    margin: 10px auto;
+    width: 90%;
+    border-radius: 0.3rem;
+    border: 1px solid #d3d6e4;
+    height: 22px;
+    text-align: center;
+}
+
+
+.links .link{
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.links .link a {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0 95px;
+    color: rgb(106, 107, 108);
+}
+
+.links .link a:hover {
+    color: #b7b3c0;
+}
+
+
+
+/* Home */
+
+.logo {
+    width: 65%;
+    height: 65%;
+}
+
+.bloque {
+    margin: 15px;
+}
+
+.home-h2, .producto-encontrado {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.input{ 
+    display: flex;
+    margin: 10px auto;
+    width: 40%;
+    border-radius: 0.3rem;
+    border: 1px solid #d3d6e4;
+    height: 22px;
+    text-align: center;
+}
+
+.submit {
+    display: flex;
+    margin: auto;
+    width: 8%;
+}
+
+
+
+/* input::placeholder {
+    background-image: "{{ url_for('img', filename='lupita.svg')}}";
+    background-image: url(../img/lupita.svg);
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: left center;
+} */
+
+
+
+
+/* Listado de productos */
+
+.productos {
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+    margin-bottom: 4%;
+    flex-wrap: wrap;
+    padding: 0 20%;
+
+}
+.productos-con-stock, .productos-sin-stock {
+    color: rgb(8, 16, 8);
+    margin: 10px;
+    display: inline-block;
+    border-radius: 6px;
+    border: 1px solid;
+    padding-left: 5px;
+}
+
+.productos-sin-stock {
+    color: rgb(174, 165, 165);    
+}
+
+footer {
+    position: relative;
+    height: 11vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: #dddddd;
+}
+
+.copyright {
+    margin-right: 70%;
+}
+
+.ventas {
+    border-style: outset;
+    border-width: 5px;
+    border-color: white;
+}
+
+.comienzo {
+    display: inline-block;
+    justify-items: center;
+}
+
+th, td{
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+    background-color: #dddddd;
+}
+
+.tabla{
+    border-collapse: collapse;
+    margin-top: 22px;
+    margin-bottom: auto;
+}
+
+.sin-stock {
+    background-color: rgba(255, 0, 0, 0.688);
+    border: 1px solid #000 inherit;
+    color: #000;
+    border-radius: 3px;
+    width: 40%;
+    padding-left: 10px;
+}
+
+
+.filtro-section {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.filtro {
+    margin: 0px 10px;
+}
+

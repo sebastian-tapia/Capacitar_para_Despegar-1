@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<h2 class="home-h2">Ventas</h2>
+<section class="filtro-section">
+<form action="{{ url_for('filtro') }}" method="get">
+<label class="fitro-fecha" for="start">Buscar por fecha:</label>
+<input type="date" name="resultado" class="filtro" min="2022-01-01" max="2022-12-31">
+<span>a</span>
+<input type="date" name="resultado1" class="filtro" min="2022-01-01" max="2022-12-31">
+<input type="submit" name="Buscar" value="Filtrar">
+</form>
+</section>
+
+
+<table class="tabla" style="width: 100%;">
+    <tr>
+        <th>Codigo de Producto</th>
+        <th>Cantidad Vendidos</th>
+        <th>Precio Total</th>
+        <th>Sucursal</th>
+        <th>Fecha</th>
+    </tr>
+
+{% for venta in vendidos %}
+        <tr>
+            <td>{{ venta.codigo_producto }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td>{{ venta.precio_total }}</td>
+            <td>Retiro</td>
+            <td>{{ venta.fecha }}</td>
+        </tr>
+    
+{% endfor %}
+</table>       
+{% endblock %}

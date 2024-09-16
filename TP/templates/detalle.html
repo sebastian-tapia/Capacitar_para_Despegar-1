@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<h2>Detalle de productos</h2> <br>
+
+
+{% for prod in producto %}
+<div class="productos">
+        {% if prod.codigo == id %}
+            <div class="productos-con-stock">
+                <img src="{{ url_for('static', filename='remera.jpeg') }}" alt="remera"> <br>
+                <span>Local: Retiro</span><br>
+                <span>Código: </span>{{ prod.codigo }} <br>
+                <span>Nombre: </span>{{ prod.nombre }} <br>
+                <p>Categorías: </p>{{ prod.categorias }} <br>
+                <span>Precio: $</span>{{ prod.precio }} <br>
+                {% if prod.stock != 0%}
+                <span>Stock: </span>{{ prod.stock }}
+                {% else %}
+                <div class="sin-stock">sin-stock</div>
+                {% endif %}
+
+            </div>
+        {% endif %}
+        
+</div>
+{% endfor %}
+
+{% endblock %}
